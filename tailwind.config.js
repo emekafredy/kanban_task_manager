@@ -32,7 +32,9 @@ export default {
       'red': {
         100: '#FF9898',
         200: '#EA5555'
-      }
+      },
+      'teal': '#49C4E5',
+      'green': '#67E2AE'
     },
     fontFamily: {
       'jakarta': ['Plus Jakarta Sans', 'sans-serif']

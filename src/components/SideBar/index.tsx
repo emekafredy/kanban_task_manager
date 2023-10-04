@@ -1,13 +1,16 @@
 import { FC } from "react";
-import { ThemeSwitch } from "./ThemeSwitch";
 import { useSelector } from "react-redux";
+
+import { ThemeSwitch } from "./ThemeSwitch";
+import { SideBarMenu } from "./SideBarMenu";
+
 import { getThemeState } from "../../store/slices/theme";
+import { useVisibleSidebar } from "../../hooks/useVisibleSidebar";
+
 import HideSidebarIcon from "../../assets/icons/icon-hide-sidebar.svg";
 import ShowSidebarIcon from "../../assets/icons/icon-show-sidebar.svg";
 import DarkLogoIcon from "../../assets/icons/logo-dark.svg";
 import LightLogoIcon from "../../assets/icons/logo-light.svg";
-import { useVisibleSidebar } from "../../hooks/useVisibleSidebar";
-import { SideBarMenu } from "./SideBarMenu";
 
 export const SideBar:FC = () => {
   const { colorTheme } = useSelector(getThemeState);
@@ -47,7 +50,7 @@ export const SideBar:FC = () => {
             className="p-10"
           />
 
-          <div className="flex flex-col gap-y-80">
+          <div className="flex flex-col gap-y-[500px]">
             <SideBarMenu />
             <ThemeSwitch />
           </div>
