@@ -7,15 +7,15 @@ import { IBoardObjectProps } from "../interfaces/board";
 export const useFetchBoards = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const dispatch = useDispatch();
-    
+
     const getAllBoards = async () => {
         setLoading(true);
         const data = await getBoards();
 
-        dispatch(setBoards(data as IBoardObjectProps[]));
+        await dispatch(setBoards(data as IBoardObjectProps[]));
         setLoading(false);
     }
-    
+
     useEffect(() => {
         getAllBoards();
     }, []);

@@ -7,16 +7,19 @@ export const BoardColumn:FC<IBoardColumnProps> = ({
 }: IBoardColumnProps) => {
   return (
     <>
-      <div className="flex items-center">
-        <DotSVG status={column.name}/>
+      {column?.tasks?.length > 0 && (
+        <div className="flex items-center">
+          <DotSVG status={column.name}/>
 
-        <span className="uppercase text-s tracking-wide text-gray font-bold">
-          {column.name} {`(${column.tasks.length})`}
-        </span>
-      </div>
+          <span className="uppercase text-s tracking-wide text-gray font-bold">
+            {column.name} {`(${column.tasks.length})`}
+          </span>
+        </div>
+      )}
 
       {column.tasks?.map((task, index) => {
         const completed = task.subtasks.filter(task => task.isCompleted).length;
+
         return (
           <div
             key={index}

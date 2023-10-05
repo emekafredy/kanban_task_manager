@@ -15,7 +15,7 @@ export const ThemeSwitch:FC = () => {
   };
 
   return (
-    <div className="w-4/5 m-auto my-6 bg-silver-100 dark:bg-black-300 py-1 px-4 rounded-lg bottom-8">
+    <div className="w-full m-auto my-6 bg-silver-100 dark:bg-black-300 py-1 px-4 rounded-lg">
       <label
         className="flex justify-center items-center group p-2 bottom-8"
       >
