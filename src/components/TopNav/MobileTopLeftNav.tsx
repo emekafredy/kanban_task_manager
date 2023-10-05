@@ -5,7 +5,13 @@ import ChevronUpIcon from "../../assets/icons/icon-chevron-up.svg";
 import { SideBarMenu } from "../SideBar/SideBarMenu";
 import { ThemeSwitch } from "../SideBar/ThemeSwitch";
 
-export const MobileTopLeftNav:FC = () => {
+interface IMobileTopLeftNavProps {
+  title: string
+}
+
+export const MobileTopLeftNav:FC<IMobileTopLeftNavProps> = ({
+  title
+}: IMobileTopLeftNavProps) => {
   const [showMobileSideBar, setShowMobileSidebar] = useState<boolean>(false);
 
   return (
@@ -21,7 +27,7 @@ export const MobileTopLeftNav:FC = () => {
             type="button"
             onClick={() => setShowMobileSidebar((prev) => !prev)}
           >
-            Platform Launch
+            {title}
             <img src={showMobileSideBar ? ChevronUpIcon : ChevronDownIcon} alt="logo" className="px-2"/>
           </button>
 

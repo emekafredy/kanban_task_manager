@@ -1,50 +1,71 @@
 import { FC, useState } from "react";
-import { BoardSVG } from "../common/BoardSVG";
-import { AddSVG } from "../common/AddSVG";
+import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+
+import { BoardSVG } from "../common/SVG/BoardSVG";
+import { AddSVG } from "../common/SVG/AddSVG";
+
+import { getAllBoardsState } from "../../store/slices/board";
+import { useFetchSingleBoard } from "../../hooks/useFetchSingleBoard";
+import { Loader } from "../common/Loader";
 
 export const SideBarMenu:FC = () => {
-  const Menus = [
-    { title: "Platform Launch" },
-    { title: "Marketing Plan" },
-    { title: "Roadmap" },
-    { title: "Platform" },
-    { title: "Launch" },
-  ];
-  const [activeBoard, setActiveBoard] = useState<string>(Menus[0].title);
+  const { boards, boardName } = useSelector(getAllBoardsState);
+  const [_, setSearchParams] = useSearchParams();
+  const { setBoardTitle } = useFetchSingleBoard();
+  
+  const [activeBoard, setActiveBoard] = useState<string>(boardName || boards[0]?.name);
+
+  const handleSelectBoard = (title: string) => {
+    setActiveBoard(title);
+    setSearchParams({ board: title })
+    setBoardTitle(title)
+  }
 
   return (
-    <div className="mt-4 max-h-[550px] overflow-auto">
-      <p className="ml-10 text-m font-bold leading-15 tracking-wide text-gray"> ALL BOARDS (3)</p>
-      <ul className="mt-6">
-        {Menus.map((Menu, index) => (
-          <li
-            key={index}
-            className={`
-              flex py-4 hover:cursor-pointer text-gray text-sm items-center
-              gap-x-4 font-bold pl-10 mr-6 ease-in-out transition-300
-              ${Menu.title === activeBoard ? 'text-white bg-purple-200 px-4 rounded-r-full' : ''}
-            `}
-            onClick={() => setActiveBoard(Menu.title)}
-          >
-            <BoardSVG color={Menu.title === activeBoard ? "#FFFFFF" : "#828FA3"}/>
-            <span className={`${!open && "hidden"} origin-left duration-200`}>
-              {Menu.title}
-            </span>
-          </li>
-        ))}
+    <div className="mt-4 overflow-auto">
+      {boards?.length > 0 ? (
+        <>
+          <p className="ml-10 text-s font-bold tracking-wide text-gray">
+            ALL BOARDS {`(${boards.length})`}
+          </p>
 
-        <li
-          className={`
-            flex py-4 cursor-pointer text-gray text-sm items-center
-            gap-x-4 font-bold pl-10 mr-6 ease-in-out transition-300`}
-        >
-          <BoardSVG color={"#635FC7"}/>
-          <AddSVG color={"#635FC7"}/>
-          <span className="ml-[-15px] text-purple-200 flex">
-            Create New Board
-          </span>
-        </li>
-      </ul>
+          <ul className="mt-6">
+            {boards?.map((board, index) => {
+              return (
+                <li
+                key={index}
+                className={`
+                  flex py-4 hover:cursor-pointer text-gray text-m items-center
+                  gap-x-4 font-bold pl-10 mr-6 ease-in-out transition-300
+                  ${board.name === activeBoard ? 'text-white bg-purple-200 px-4 rounded-r-full' : ''}
+                `}
+                onClick={() => handleSelectBoard(board.name)}
+              >
+                <BoardSVG color={board.name === activeBoard ? "#FFFFFF" : "#828FA3"}/>
+                <span className={`${!open && "hidden"} origin-left duration-200`}>
+                  {board.name}
+                </span>
+              </li>
+              )
+            })}
+
+            <li
+              className={`
+                flex py-4 cursor-pointer text-gray text-m items-center
+                gap-x-4 font-bold pl-10 mr-6 ease-in-out transition-300`}
+            >
+              <BoardSVG color={"#635FC7"} />
+              <AddSVG color={"#635FC7"} />
+              <span className="ml-[-12px] text-purple-200 flex">
+                Create New Board
+              </span>
+            </li>
+          </ul>
+        </>
+      ) : (
+        <Loader color={"#635FC7"} />
+      )}
     </div>
   )
 };

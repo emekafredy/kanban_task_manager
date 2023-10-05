@@ -1,44 +1,56 @@
 import { FC } from "react";
-import { ThemeSwitch } from "./ThemeSwitch";
 import { useSelector } from "react-redux";
+
+import { ThemeSwitch } from "./ThemeSwitch";
+import { SideBarMenu } from "./SideBarMenu";
+
 import { getThemeState } from "../../store/slices/theme";
+
 import HideSidebarIcon from "../../assets/icons/icon-hide-sidebar.svg";
 import ShowSidebarIcon from "../../assets/icons/icon-show-sidebar.svg";
 import DarkLogoIcon from "../../assets/icons/logo-dark.svg";
 import LightLogoIcon from "../../assets/icons/logo-light.svg";
-import { useVisibleSidebar } from "../../hooks/useVisibleSidebar";
-import { SideBarMenu } from "./SideBarMenu";
 
-export const SideBar:FC = () => {
+interface ISideBarProps {
+  sideBarVisible: boolean;
+  setSidebarVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const SideBar:FC<ISideBarProps> = ({
+  sideBarVisible,
+  setSidebarVisible,
+}: ISideBarProps) => {
   const { colorTheme } = useSelector(getThemeState);
-  const {visible, setSidebarVisible} = useVisibleSidebar();
 
   return (
     <>
-      {!visible ? (
+      {!sideBarVisible ? (
         <div
-          onClick={() => setSidebarVisible("true")}
+          onClick={() => setSidebarVisible(true)}
           className="fixed cursor-pointer left-0 bottom-8
             bg-purple-200 p-6 pr-8 rounded-r-full
-            sm-mobile:hidden tablet:block"
+            sm-mobile:hidden tablet:block z-50"
         >
           <img src={ShowSidebarIcon} alt="show-sidebar" className="w-6"/>
         </div>
       ) : (
         <div className={`
+          laptop:col-span-2
+          tablet:col-span-3
+          flex-none
           sm-mobile:hidden
           tablet:block
+          h-screen
+          sticky
           top-0
           left-0
-          laptop:w-[300px]
-          tablet:w-[250px]
           bg-white
           dark:bg-black-200
           text-white
-          h-screen
           ease-in-out
           border-r-2
           border-silver-200
+          overflow-y-hidden
           dark:border-black-100`}
         >
           <img
@@ -47,19 +59,19 @@ export const SideBar:FC = () => {
             className="p-10"
           />
 
-          <div className="flex flex-col gap-y-80">
-            <SideBarMenu />
-            <ThemeSwitch />
-          </div>
+          <SideBarMenu />
 
-          <div className="flex items-center px-2 w-4/5 m-auto">
-            <img
-              src={HideSidebarIcon}
-              alt="hide-sidebar"
-              className="mr-4 hover:cursor-pointer"
-              onClick={() => setSidebarVisible("false")}
-            />
-            <span className="text-gray font-bold text-m">Hide Sidebar</span>
+          <div className="absolute bottom-8 px-4 w-full">
+            <ThemeSwitch />
+            <div className="flex items-center w-4/5 mx-4">
+              <img
+                src={HideSidebarIcon}
+                alt="hide-sidebar"
+                className="mr-4 hover:cursor-pointer"
+                onClick={() => setSidebarVisible(false)}
+              />
+              <span className="text-gray font-bold text-m">Hide Sidebar</span>
+            </div>
           </div>
         </div>
       )}
