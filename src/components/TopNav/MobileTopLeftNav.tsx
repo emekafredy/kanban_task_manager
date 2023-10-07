@@ -4,15 +4,14 @@ import ChevronDownIcon from "../../assets/icons/icon-chevron-down.svg";
 import ChevronUpIcon from "../../assets/icons/icon-chevron-up.svg";
 import { SideBarMenu } from "../SideBar/SideBarMenu";
 import { ThemeSwitch } from "../SideBar/ThemeSwitch";
-
-interface IMobileTopLeftNavProps {
-  title: string
-}
+import { BoardFormModal } from "../BoardFormModal";
+import { IMobileTopLeftNavProps } from "../../interfaces/navigation";
 
 export const MobileTopLeftNav:FC<IMobileTopLeftNavProps> = ({
   title
-}: IMobileTopLeftNavProps) => {
+}) => {
   const [showMobileSideBar, setShowMobileSidebar] = useState<boolean>(false);
+  const [showAddNewBoardModal, setShowAddNewBoardModal] = useState<boolean>(false);
 
   return (
     <>
@@ -35,12 +34,13 @@ export const MobileTopLeftNav:FC<IMobileTopLeftNavProps> = ({
             <div className="absolute z-[1000] w-full float-left mt-6 min-w-max
               h-[250px] overflow-auto rounded-lg border-none bg-white
               dark:bg-black-200">
-              <SideBarMenu />
+              <SideBarMenu setShowModal={setShowAddNewBoardModal}/>
               <ThemeSwitch />
             </div>
           )}
         </div>
       </div>
+      {showAddNewBoardModal && <BoardFormModal setShowModal={setShowAddNewBoardModal} />}
     </>
   )
 };

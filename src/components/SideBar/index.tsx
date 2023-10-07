@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { ThemeSwitch } from "./ThemeSwitch";
@@ -10,17 +10,15 @@ import HideSidebarIcon from "../../assets/icons/icon-hide-sidebar.svg";
 import ShowSidebarIcon from "../../assets/icons/icon-show-sidebar.svg";
 import DarkLogoIcon from "../../assets/icons/logo-dark.svg";
 import LightLogoIcon from "../../assets/icons/logo-light.svg";
-
-interface ISideBarProps {
-  sideBarVisible: boolean;
-  setSidebarVisible: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { BoardFormModal } from "../BoardFormModal";
+import { ISideBarProps } from "../../interfaces/navigation";
 
 export const SideBar:FC<ISideBarProps> = ({
   sideBarVisible,
   setSidebarVisible,
-}: ISideBarProps) => {
+}) => {
   const { colorTheme } = useSelector(getThemeState);
+  const [showAddNewBoardModal, setShowAddNewBoardModal] = useState<boolean>(false);
 
   return (
     <>
@@ -29,7 +27,7 @@ export const SideBar:FC<ISideBarProps> = ({
           onClick={() => setSidebarVisible(true)}
           className="fixed cursor-pointer left-0 bottom-8
             bg-purple-200 p-6 pr-8 rounded-r-full
-            sm-mobile:hidden tablet:block z-50"
+            sm-mobile:hidden tablet:block z-10"
         >
           <img src={ShowSidebarIcon} alt="show-sidebar" className="w-6"/>
         </div>
@@ -47,11 +45,11 @@ export const SideBar:FC<ISideBarProps> = ({
           bg-white
           dark:bg-black-200
           text-white
-          ease-in-out
           border-r-2
           border-silver-200
           overflow-y-hidden
-          dark:border-black-100`}
+          dark:border-black-100
+          ${sideBarVisible ? "translate-x-0 " : "translate-x-full"}`}
         >
           <img
             src={colorTheme === 'dark' ? LightLogoIcon : DarkLogoIcon}
@@ -59,22 +57,26 @@ export const SideBar:FC<ISideBarProps> = ({
             className="p-10"
           />
 
-          <SideBarMenu />
+          <SideBarMenu setShowModal={setShowAddNewBoardModal}/>
 
           <div className="absolute bottom-8 px-4 w-full">
             <ThemeSwitch />
-            <div className="flex items-center w-4/5 mx-4">
+            <div className="flex items-center w-full ml-[-14px] hover:cursor-pointer
+              p-4 px-4  hover:bg-silver-200 hover:rounded-r-full
+              hover:text-purple-200 transition duration-500"
+              onClick={() => setSidebarVisible(false)}
+            >
               <img
                 src={HideSidebarIcon}
                 alt="hide-sidebar"
-                className="mr-4 hover:cursor-pointer"
-                onClick={() => setSidebarVisible(false)}
+                className="mr-4"
               />
-              <span className="text-gray font-bold text-m">Hide Sidebar</span>
+              <span className="text-gray hover:text-purple-200 font-bold text-m">Hide Sidebar</span>
             </div>
           </div>
         </div>
       )}
+      {showAddNewBoardModal && <BoardFormModal setShowModal={setShowAddNewBoardModal} />}
     </>
   )
 };

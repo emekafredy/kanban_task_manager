@@ -1,12 +1,9 @@
 import { FC } from "react";
-
-interface IDotSVGProps {
-  status: string;
-}
+import { IDotSVGProps } from "../../../interfaces/common";
 
 export const DotSVG:FC<IDotSVGProps> = ({
   status
-}: IDotSVGProps) => {
+}) => {
 
   const setDotColor = () => {
     if (status.toLowerCase() === 'todo') {

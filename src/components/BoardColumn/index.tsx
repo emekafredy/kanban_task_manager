@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { IBoardColumnProps } from "../../interfaces/board";
-import { DotSVG } from "../common/SVG/DotSVG";
+import { DotSVG } from "../Common/SVG/DotSVG";
 
 export const BoardColumn:FC<IBoardColumnProps> = ({
   column
-}: IBoardColumnProps) => {
+}) => {
   return (
     <>
       {column?.tasks?.length > 0 && (

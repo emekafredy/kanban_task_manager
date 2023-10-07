@@ -2,18 +2,13 @@ import { FC } from "react";
 
 import DarkLogoIcon from "../../assets/icons/logo-dark.svg";
 import LightLogoIcon from "../../assets/icons/logo-light.svg";
-
-interface ITopLeftNavProps {
-  sideBarVisible: boolean | null;
-  colorTheme: string;
-  title: string
-}
+import { ITopLeftNavProps } from "../../interfaces/navigation";
 
 export const TopLeftNav:FC<ITopLeftNavProps> = ({
   sideBarVisible,
   colorTheme,
   title
-}: ITopLeftNavProps) => {
+}) => {
   return (
     <div className="sm-mobile:hidden tablet:flex items-center">
       {!sideBarVisible && (

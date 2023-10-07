@@ -1,30 +1,36 @@
-import { FC, useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-
-import { BoardSVG } from "../common/SVG/BoardSVG";
-import { AddSVG } from "../common/SVG/AddSVG";
-
+import { BoardSVG } from "../Common/SVG/BoardSVG";
+import { AddSVG } from "../Common/SVG/AddSVG";
 import { getAllBoardsState } from "../../store/slices/board";
 import { useFetchSingleBoard } from "../../hooks/useFetchSingleBoard";
-import { Loader } from "../common/Loader";
+import { Loader } from "../Common/Loader";
 
-export const SideBarMenu:FC = () => {
-  const { boards, boardName } = useSelector(getAllBoardsState);
-  const [_, setSearchParams] = useSearchParams();
+export const SideBarMenu = ({
+  setShowModal
+}: { setShowModal: React.Dispatch<React.SetStateAction<boolean>>; }) => {
+  const { boards } = useSelector(getAllBoardsState);
+  const [searchParams, setSearchParams] = useSearchParams();
   const { setBoardTitle } = useFetchSingleBoard();
+  const boardOnURL = searchParams.get("board")
   
-  const [activeBoard, setActiveBoard] = useState<string>(boardName || boards[0]?.name);
+  const [activeBoard, setActiveBoard] = useState<string>(boardOnURL || boards[0]?.name);
 
-  const handleSelectBoard = (title: string) => {
-    setActiveBoard(title);
-    setSearchParams({ board: title })
-    setBoardTitle(title)
+  const handleSelectBoard = () => {
+    setSearchParams({ board: activeBoard })
+    setBoardTitle(activeBoard)
   }
 
+  useEffect(() => {
+    handleSelectBoard()
+  }, [activeBoard])
+
   return (
-    <div className="mt-4 overflow-auto">
-      {boards?.length > 0 ? (
+    <div className="mt-4 max-h-[400px] overflow-auto">
+      {boards?.length === 0 ? (
+        <Loader color={"#635FC7"} />
+      ) : (
         <>
           <p className="ml-10 text-s font-bold tracking-wide text-gray">
             ALL BOARDS {`(${boards.length})`}
@@ -37,10 +43,11 @@ export const SideBarMenu:FC = () => {
                 key={index}
                 className={`
                   flex py-4 hover:cursor-pointer text-gray text-m items-center
-                  gap-x-4 font-bold pl-10 mr-6 ease-in-out transition-300
+                  gap-x-4 font-bold pl-10 mr-6 ease-in-out transition duration-500
+                  ${board.name !== activeBoard ? 'hover:bg-silver-200 hover:rounded-r-full hover:text-purple-200' : ''}
                   ${board.name === activeBoard ? 'text-white bg-purple-200 px-4 rounded-r-full' : ''}
                 `}
-                onClick={() => handleSelectBoard(board.name)}
+                onClick={() => setActiveBoard(board.name)}
               >
                 <BoardSVG color={board.name === activeBoard ? "#FFFFFF" : "#828FA3"}/>
                 <span className={`${!open && "hidden"} origin-left duration-200`}>
@@ -54,6 +61,7 @@ export const SideBarMenu:FC = () => {
               className={`
                 flex py-4 cursor-pointer text-gray text-m items-center
                 gap-x-4 font-bold pl-10 mr-6 ease-in-out transition-300`}
+                onClick={() => setShowModal(true)}
             >
               <BoardSVG color={"#635FC7"} />
               <AddSVG color={"#635FC7"} />
@@ -63,8 +71,6 @@ export const SideBarMenu:FC = () => {
             </li>
           </ul>
         </>
-      ) : (
-        <Loader color={"#635FC7"} />
       )}
     </div>
   )

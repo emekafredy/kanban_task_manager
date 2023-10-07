@@ -1,12 +1,9 @@
 import { FC } from "react";
-
-interface ILoaderProps {
-  color: string;
-}
+import { ILoaderProps } from "../../interfaces/common";
 
 export const Loader:FC<ILoaderProps> = ({
   color
-}: ILoaderProps) => {
+}) => {
   return (
     <div className="text-center">
         <div role="status">
