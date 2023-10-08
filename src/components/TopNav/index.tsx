@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
-import { AddSVG } from "../common/SVG/AddSVG";
+import { AddSVG } from "../Common/SVG/AddSVG";
 import Elipses from "../../assets/icons/icon-vertical-ellipsis.svg";
 import { getThemeState } from "../../store/slices/theme";
 import { MobileTopLeftNav } from "./MobileTopLeftNav";
 import { TopLeftNav } from "./TopLeftNav";
-import { Loader } from "../common/Loader";
+import { Loader } from "../Common/Loader";
 import { useTheme } from "../../hooks/useTheme";
 
 import { getAllBoardsState } from "../../store/slices/board";
@@ -18,7 +18,8 @@ export const TopNav = ({
   const { loading } = useFetchBoards();
   useTheme();
   const { colorTheme } = useSelector(getThemeState);
-  const { boardName, boards } = useSelector(getAllBoardsState);
+  const { boardName, boards, board } = useSelector(getAllBoardsState);
+  const selectedBoard = board || boards[0]
 
   return (
     <nav className="
@@ -45,10 +46,12 @@ export const TopNav = ({
           <div className="flex items-center p-4">
             <button
               type="button"
-              className="text-white bg-purple-200 rounded-full px-5 py-2 
-                inline-flex items-center font-extrabold mr-4">
-              <AddSVG color={"#FFFFFF"} />
-              <span className="tablet:inline sm-mobile:hidden text-m ml-1">Add New Task</span>
+              className="text-white bg-purple-200 rounded-full px-5 py-3 
+                inline-flex items-center font-extrabold mr-4 disabled:opacity-50"
+              disabled={selectedBoard?.columns.length === 0}
+            >
+              <AddSVG color={"#FFFFFF"}/>
+              <span className="tablet:inline sm-mobile:hidden text-s ml-1">Add New Task</span>
             </button>
 
             <img

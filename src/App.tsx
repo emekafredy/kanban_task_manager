@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { ToastContainer } from 'react-toastify';
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { SideBar } from "./components/SideBar";
 import { TopNav } from "./components/TopNav";
 import { Home } from "./pages/Home";
 import { useFetchBoards } from "./hooks/useFetchBoards";
-import { Loader } from "./components/common/Loader";
+import { Loader } from "./components/Common/Loader";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [sideBarVisible, setSidebarVisible] = useState(true);
@@ -34,6 +36,7 @@ function App() {
                 <Route path="/boards" element={<Home />} />
               </Routes>
             </div>
+            <ToastContainer />
           </>
         )}
       </div>

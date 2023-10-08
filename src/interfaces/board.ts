@@ -1,6 +1,5 @@
 export interface IBoardObjectProps {
   name: string;
-  statuses: string[];
   columns: {
     name: string;
     tasks: {
@@ -28,3 +27,11 @@ export interface IBoardColumnProps {
     }[],
   };
 };
+
+export interface IBoardFormModalProps {
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface IBoardDataProps {
+  board: IBoardObjectProps
+}

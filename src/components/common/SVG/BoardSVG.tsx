@@ -1,12 +1,9 @@
 import { FC } from "react";
+import { ISVGProps } from "../../../interfaces/common";
 
-interface IBoardSVGProps {
-  color: string;
-}
-
-export const BoardSVG:FC<IBoardSVGProps> = ({
+export const BoardSVG:FC<ISVGProps> = ({
   color
-}: IBoardSVGProps) => {
+}) => {
   return (
     <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
       <path

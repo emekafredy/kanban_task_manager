@@ -1,9 +1,9 @@
-import { FC, useState } from "react";
+import { useState } from "react";
 import { useTheme } from "../../hooks/useTheme";
 import DarkThemeIcon from '../../assets/icons/icon-dark-theme.svg';
 import LightThemeIcon from '../../assets/icons/icon-light-theme.svg';
  
-export const ThemeSwitch:FC = () => {
+export const ThemeSwitch = () => {
   const {colorTheme, setTheme} = useTheme();
   const [dark, setDark] = useState(
       colorTheme === "light" ? true : false
@@ -15,7 +15,7 @@ export const ThemeSwitch:FC = () => {
   };
 
   return (
-    <div className="w-full m-auto my-6 bg-silver-100 dark:bg-black-300 py-1 px-4 rounded-lg">
+    <div className="w-full m-auto mt-6 mb-4 bg-silver-100 dark:bg-black-300 py-1 px-4 rounded-lg">
       <label
         className="flex justify-center items-center group p-2 bottom-8"
       >

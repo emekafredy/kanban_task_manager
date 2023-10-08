@@ -9,15 +9,15 @@ export const useFetchSingleBoard = () => {
   const [boardTitle, setBoardTitle] = useState<string>('');
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
-
+  
   const getBoard = async () => {
-      setLoading(true);
-      const title = await searchParams.get("board");
-      const data = await getSingleBoard(title);
+    setLoading(true);
+    const title = await searchParams.get("board");
+    const data = await getSingleBoard(title);
 
-      await dispatch(setSingleBoard(data));
-      await dispatch(setBoardName(title as string));
-      setLoading(false);
+    await dispatch(setSingleBoard(data));
+    await dispatch(setBoardName(title as string));
+    setLoading(false);
   }
 
   useEffect(() => {
