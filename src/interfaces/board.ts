@@ -10,7 +10,6 @@ export interface IBoardObjectProps {
         title: string;
         isCompleted: boolean;
       }[]
-      statusOrder: number;
     }[],
   }[];
 }

@@ -15,12 +15,12 @@ export const Button:FC<IButtonProps> = ({
   handleClick,
   disabled=false
 }) => {
-  const classes = className("mt-4 py-3 text-s font-bold", {
+  const classes = className("mt-2 py-3 text-s font-bold", {
     "w-full": fullwidth,
     "rounded": rounded,
     "rounded-full": roundedBG,
     "bg-purple-200 text-white": purple,
-    "bg-silver-200 text-purple-200": silver,
+    "bg-silver-300 text-purple-200": silver,
     "bg-white text-purple-200": white,
     "bg-black-400 text-white": black,
   });

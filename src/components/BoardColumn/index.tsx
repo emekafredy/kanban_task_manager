@@ -18,8 +18,6 @@ export const BoardColumn:FC<IBoardColumnProps> = ({
       )}
 
       {column.tasks?.map((task, index) => {
-        const completed = task.subtasks.filter(task => task.isCompleted).length;
-
         return (
           <div
             key={index}
@@ -28,9 +26,11 @@ export const BoardColumn:FC<IBoardColumnProps> = ({
             <h5 className="mb-2 text-m font-bold text-black-400 dark:text-white">
               {task.title}
             </h5>
-            <p className="text-s text-gray">
-              {completed} out of {task.subtasks.length} sub-tasks
-            </p>
+            {task.subtasks && task.subtasks?.length > 0 && (
+              <p className="text-s text-gray">
+                {task.subtasks.filter(task => task.isCompleted).length} out of {task.subtasks.length} sub-tasks
+              </p>
+            )}
           </div>
         )
       })}

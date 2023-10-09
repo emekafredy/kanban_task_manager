@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { IInputProps } from "../../../../interfaces/form";
 
-export const Input:FC<IInputProps> = ({
+export const Textarea:FC<IInputProps> = ({
   hasLabel,
   formLabel,
   formTitle,
@@ -21,7 +21,7 @@ export const Input:FC<IInputProps> = ({
           {formLabel}
         </label>
       )}
-      <input
+      <textarea
         {...register(formTitle)}
         className="appearance-none border border-gray rounded w-full
           py-2 px-3 text-black-400 leading-tight focus:outline-purple-200"
@@ -29,6 +29,7 @@ export const Input:FC<IInputProps> = ({
         type={inputType}
         placeholder={placeholder}
         defaultValue={value}
+        rows="6"
       />
       {errors[formTitle] && (
         <p className="text-red-200 text-s">{errors[formTitle].message}</p>

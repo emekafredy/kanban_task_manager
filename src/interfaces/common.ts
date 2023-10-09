@@ -30,3 +30,7 @@ export interface ISVGProps {
 export interface IDotSVGProps {
   status: string;
 }
+
+export interface IFormModalProps {
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+};

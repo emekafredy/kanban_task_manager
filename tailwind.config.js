@@ -6,7 +6,7 @@ export default {
   darkMode: "class",
   theme: {
     screens: {
-      'sm-mobile': '350px',
+      'sm-mobile': '200px',
       'mobile': '640px',
       'tablet': '768px',
       'laptop': '1200px',
@@ -28,7 +28,8 @@ export default {
       'gray': '#828FA3',
       'silver': {
         100: '#F4F7FD',
-        200: '#E4EBFA'
+        200: '#E4EBFA',
+        300: '#635FC71A'
       },
       'red': {
         100: '#FF9898',

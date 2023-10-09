@@ -6,7 +6,8 @@ export const GroupInput:FC<IGroupInputProps> = ({
   removeInput,
   value,
   handleChange,
-  inputId
+  inputId,
+  placeholder
 }) => {
   return (
     <div className="flex justify-between items-center">
@@ -16,8 +17,9 @@ export const GroupInput:FC<IGroupInputProps> = ({
           py-2 px-3 text-black-100 leading-tight focus:outline-purple-200"
         type="text"
         id={inputId}
-        defaultValue={value}
+        value={value}
         onChange={(e) => handleChange(e)}
+        placeholder={placeholder}
       />
       </div>
       <button

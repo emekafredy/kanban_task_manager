@@ -6,7 +6,6 @@ import { z } from "zod";
 import { Modal } from "../Common/Modal";
 import { Input } from "../Common/Forms/Input";
 import { Button } from "../Common/Forms/Button";
-import { GroupInput } from "../Common/Forms/GroupInput";
 import { getAllBoardsState, setBoards } from "../../store/slices/board";
 import { IBoardObjectProps } from "../../interfaces/board";
 import { IFormModalProps } from "../../interfaces/common";
@@ -16,11 +15,11 @@ import { renderSuccessMessage, renderErrorMessage } from "../../helper/toaster";
 
 type BoardFormType = z.infer<typeof newBoardFormSchema>;
 
-export const BoardFormModal:FC<IFormModalProps> = ({
-  setShowModal: setShowBoardFormModal
+export const ColumnFormModal:FC<IFormModalProps> = ({
+  setShowModal: setShowColumnFormModal
 }) => {
   const { boards } = useSelector(getAllBoardsState);
-  const [boardColumns, setBoardColumns] = useState<string[]>(['Todo', 'Doing', 'Done']);
+  const [boardColumns] = useState<string[]>(['Todo', 'Doing', 'Done']);
   const [loading, setLoading] = useState<boolean>(false);
   const {
     register,
@@ -31,7 +30,7 @@ export const BoardFormModal:FC<IFormModalProps> = ({
   });
   const dispatch = useDispatch();
 
-  const submitHandler = async (data: BoardFormType) => {
+  const saveColumnHandler = async (data: BoardFormType) => {
     try {
       setLoading(true);
       const newBoard = await createBoard({
@@ -39,92 +38,39 @@ export const BoardFormModal:FC<IFormModalProps> = ({
         columns: boardColumns,
         boards
       })
-
+    
       await dispatch(setBoards([...boards, newBoard] as IBoardObjectProps[]));
       setLoading(false);
-      setShowBoardFormModal(false);
+      setShowColumnFormModal(false);
       renderSuccessMessage('Board saved successfully');
     } catch (err) {
       renderErrorMessage()
     }
   };
 
-  const handleAddColumn = () => {
-    const newColumn = '';
-    setBoardColumns(prev => [...prev, newColumn])
-  }
-
-  const handleRemoveColumn = (e: any, val: string) => {
-    e.preventDefault();
-    const filteredBoardColumns = boardColumns.filter((col) => col != val);
-    setBoardColumns([...filteredBoardColumns])
-  }
-
-  const handleColumnChange = (e: any) => {
-    const {id, value} = e.target;
-    let columns = [...boardColumns];
-    let column = columns[Number(id)];
-    column = value;
-    columns[Number(id)] = column;
-
-    setBoardColumns([...columns]);
-  }
-
   return (
     <Modal
-      title={"Add New Board"}
+      title={"Add New Column"}
       children={
         <form
           className="p-8"
-          onSubmit={handleSubmit(submitHandler)}
+          onSubmit={handleSubmit(saveColumnHandler)}
         >
           <Input
             hasLabel={true}
             errors={errors}
-            formLabel="Name"
+            formLabel="Column Name"
             formTitle="name"
             inputType="text"
-            placeholder="e.g. Web Design"
+            placeholder="e.g. In Progress"
             register={register}
           />
-
-
-          <label
-            className="block text-gray text-s font-semibold mb-2 mt-8"
-            htmlFor="columns"
-          >
-            Columns
-          </label>
-
-          {boardColumns.map((col, i) => {
-            return (
-              <GroupInput
-                key={i}
-                inputId={String(i)}
-                removeInput={(e) => handleRemoveColumn(e, col)}
-                value={col}
-                handleChange={(e) => handleColumnChange(e)}
-              />
-            )
-          })}
-
-          <div>
-            <Button
-              silver
-              buttonType="button"
-              title="Add New Column"
-              fullwidth
-              roundedBG
-              handleClick={() => handleAddColumn()}
-              disabled={boardColumns[boardColumns.length - 1] === ''}
-            />
-          </div>
 
           <div>
             <Button
               purple
               buttonType="submit"
-              title="Create New Board"
+              title="Create New Column"
               fullwidth
               roundedBG
               disabled={loading}
@@ -132,7 +78,7 @@ export const BoardFormModal:FC<IFormModalProps> = ({
           </div>
         </form>
       }
-      setShowModal={setShowBoardFormModal}
+      setShowModal={setShowColumnFormModal}
     />
   )
 };
