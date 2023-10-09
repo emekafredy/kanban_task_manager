@@ -20,7 +20,7 @@ export const Button:FC<IButtonProps> = ({
     "rounded": rounded,
     "rounded-full": roundedBG,
     "bg-purple-200 text-white": purple,
-    "bg-silver-300 text-purple-200": silver,
+    "bg-silver-300 dark:bg-white text-purple-200": silver,
     "bg-white text-purple-200": white,
     "bg-black-400 text-white": black,
   });

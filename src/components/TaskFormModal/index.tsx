@@ -127,7 +127,7 @@ export const TaskFormModal:FC<IFormModalProps> = ({
 
 
           <label
-            className="block text-gray text-s font-semibold mb-2 mt-8"
+            className="block text-gray-200 text-s font-semibold mb-2 mt-8"
             htmlFor="columns"
           >
             Subtasks
@@ -168,7 +168,7 @@ export const TaskFormModal:FC<IFormModalProps> = ({
             <Button
               purple
               buttonType="submit"
-              title="Create New Board"
+              title="Create Task"
               fullwidth
               roundedBG
               disabled={loading}

@@ -11,7 +11,7 @@ export const BoardColumn:FC<IBoardColumnProps> = ({
         <div className="flex items-center">
           <DotSVG status={column.name}/>
 
-          <span className="uppercase text-s tracking-wide text-gray font-bold">
+          <span className="uppercase text-s tracking-wide text-gray-200 font-bold">
             {column.name} {`(${column.tasks.length})`}
           </span>
         </div>
@@ -27,7 +27,7 @@ export const BoardColumn:FC<IBoardColumnProps> = ({
               {task.title}
             </h5>
             {task.subtasks && task.subtasks?.length > 0 && (
-              <p className="text-s text-gray">
+              <p className="text-s text-gray-200">
                 {task.subtasks.filter(task => task.isCompleted).length} out of {task.subtasks.length} sub-tasks
               </p>
             )}

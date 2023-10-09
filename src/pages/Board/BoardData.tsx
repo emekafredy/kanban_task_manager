@@ -32,7 +32,7 @@ export const BoardData:FC<IBoardDataProps> = ({board}) => {
           >
             <button
               type="button"
-              className="text-gray bg-silver-200 dark:bg-black-200 text-xl rounded-full px-5 py-2 
+              className="text-gray-200 bg-silver-200 dark:bg-black-200 text-xl rounded-full px-5 py-2 
                 inline-flex justify-center items-center font-extrabold mr-4">
                   <AddSVG color={"#828FA3"} />
                   <p>

@@ -71,7 +71,7 @@ export const SideBar:FC<ISideBarProps> = ({
                 alt="hide-sidebar"
                 className="mr-4"
               />
-              <span className="text-gray hover:text-purple-200 font-bold text-m">Hide Sidebar</span>
+              <span className="text-gray-200 hover:text-purple-200 font-bold text-m">Hide Sidebar</span>
             </div>
           </div>
         </div>

@@ -13,17 +13,17 @@ export const Modal:FC<IModalProps> = ({
         className="justify-center items-center flex overflow-x-hidden
           overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
       >
-        <div className="relative sm-mobile:w-[90%] mobile:w-[75%] tablet:w-[50%]  laptop:w-[30%] m-auto">
-          <div className="border-0 rounded shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+        <div className="relative sm-mobile:w-[90%] mobile:w-[75%] tablet:w-[50%] laptop:w-[40%] desktop:w-[30%] m-auto">
+          <div className="border-0 rounded shadow-lg relative flex flex-col w-full bg-white dark:bg-black-200 outline-none focus:outline-none">
             <div className="flex justify-between items-center pt-8 px-8">
-              <h3 className="text-l font-bold">
+              <h3 className="text-l font-bold text-black-300 dark:text-white">
                 {title}
               </h3>
               <button
-                className="ml-auto border-0 text-gray text-3xl font-bold outline-none focus:outline-none"
+                className="ml-auto border-0 text-gray-200 text-3xl font-bold outline-none focus:outline-none"
                 onClick={() => setShowModal(false)}
               >
-                <span className="text-gray text-3xl block outline-none focus:outline-none">
+                <span className="text-gray-200 dark:text-white text-3xl block outline-none focus:outline-none">
                   ×
                 </span>
               </button>

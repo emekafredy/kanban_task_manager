@@ -90,7 +90,7 @@ export const BoardFormModal:FC<IFormModalProps> = ({
 
 
           <label
-            className="block text-gray text-s font-semibold mb-2 mt-8"
+            className="block text-gray-200 text-s font-semibold mb-2 mt-8"
             htmlFor="columns"
           >
             Columns
@@ -108,7 +108,7 @@ export const BoardFormModal:FC<IFormModalProps> = ({
             )
           })}
 
-          <div>
+          <div className="mb-4">
             <Button
               silver
               buttonType="button"

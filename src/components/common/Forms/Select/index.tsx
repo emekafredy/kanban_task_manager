@@ -15,14 +15,14 @@ export const Select:FC<ISelectProps> = ({
   return (
     <div className="w-full my-8">
       <label
-        className="block text-gray text-s font-semibold mb-2"
+        className="block text-gray-200 dark:text-white text-s font-semibold mb-2"
         htmlFor={formTitle}
       >
         {formLabel}
       </label>
       <div
         onClick={() => setOpen(prev => !prev)}
-        className={`p-2 flex items-center justify-between rounded border border-gray cursor-pointer`}
+        className={`p-2 flex items-center text-black-100 dark:text-white justify-between rounded border border-gray-100 cursor-pointer`}
       >
         {selected ? (selected?.length > 15
           ? selected?.substring(0, 15) + "..."

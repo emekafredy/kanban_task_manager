@@ -32,7 +32,7 @@ export const SideBarMenu = ({
         <Loader color={"#635FC7"} />
       ) : (
         <>
-          <p className="ml-10 text-s font-bold tracking-wide text-gray">
+          <p className="ml-10 text-s font-bold tracking-wide text-gray-200">
             ALL BOARDS {`(${boards.length})`}
           </p>
 
@@ -42,7 +42,7 @@ export const SideBarMenu = ({
                 <li
                 key={index}
                 className={`
-                  flex py-4 hover:cursor-pointer text-gray text-m items-center
+                  flex py-4 hover:cursor-pointer text-gray-200 text-m items-center
                   gap-x-4 font-bold pl-10 mr-6 ease-in-out transition duration-500
                   ${board.name !== activeBoard ? 'hover:bg-silver-200 hover:rounded-r-full hover:text-purple-200' : ''}
                   ${board.name === activeBoard ? 'text-white bg-purple-200 px-4 rounded-r-full' : ''}
@@ -59,7 +59,7 @@ export const SideBarMenu = ({
 
             <li
               className={`
-                flex py-4 cursor-pointer text-gray text-m items-center
+                flex py-4 cursor-pointer text-gray-200 text-m items-center
                 gap-x-4 font-bold pl-10 mr-6 ease-in-out transition-300`}
                 onClick={() => setShowModal(true)}
             >

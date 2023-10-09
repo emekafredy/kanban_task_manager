@@ -4,7 +4,7 @@ export const NoColumn = () => {
   return (
     <div className="flex items-center justify-center overflow-auto bg-silver-100 dark:bg-black-300 h-[92%]">
       <div className="text-center">
-        <h4 className="text-l font-semibold text-gray mb-4">
+        <h4 className="text-l font-semibold text-gray-200 mb-4">
           This board is empty. Create a new column to get started.
         </h4>
         <button
