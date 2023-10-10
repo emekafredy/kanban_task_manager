@@ -8,9 +8,24 @@ export const Select:FC<ISelectProps> = ({
   formTitle,
   optionsData,
   selected,
-  setSelected
+  setSelected,
+  mode,
+  handleTaskStatusUpdate
 }) => {
   const [open, setOpen] = useState(false);
+
+  const handleSelectChange = (status: string) => {
+    if (status !== selected) {
+      setSelected(status);
+      setOpen(false);
+
+      if (mode === "update") {
+        handleTaskStatusUpdate?.('status', status);
+      } else {
+        return;
+      }
+    }
+  }
 
   return (
     <div className="w-full my-8">
@@ -41,12 +56,7 @@ export const Select:FC<ISelectProps> = ({
               className={`p-2 text-m cursor-pointer
                 ${data === selected ? 'bg-purple-200 text-white' : 'text-black-100 hover:bg-silver-300'}
               `}
-              onClick={() => {
-                if (data !== selected) {
-                  setSelected(data);
-                  setOpen(false);
-                }
-              }}
+              onClick={() => handleSelectChange(data)}
             >
               {data}
             </li>

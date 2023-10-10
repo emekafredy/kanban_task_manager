@@ -1,10 +1,23 @@
-import { FC } from "react";
+import { FC, useState } from "react";
+import { useDispatch } from "react-redux";
 import { IBoardColumnProps } from "../../interfaces/board";
 import { DotSVG } from "../Common/SVG/DotSVG";
+import { TaskCard } from "./TaskCard";
+import { TaskDetailsModal } from "../TaskDetailsModal";
+import { setTask } from "../../store/slices/task";
 
 export const BoardColumn:FC<IBoardColumnProps> = ({
-  column
+  column,
+  statuses
 }) => {
+  const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false);
+  const dispatch = useDispatch();
+
+  const loadTask = async (task: any) => {
+    await dispatch(setTask(task));
+    setShowTaskDetailsModal(true);
+  }
+
   return (
     <>
       {column?.tasks?.length > 0 && (
@@ -19,21 +32,21 @@ export const BoardColumn:FC<IBoardColumnProps> = ({
 
       {column.tasks?.map((task, index) => {
         return (
-          <div
+          <TaskCard
             key={index}
-            className="block p-4 bg-white rounded-lg shadow hover:cursor-pointer dark:bg-black-200 w-[300px] my-4"
-          >
-            <h5 className="mb-2 text-m font-bold text-black-400 dark:text-white">
-              {task.title}
-            </h5>
-            {task.subtasks && task.subtasks?.length > 0 && (
-              <p className="text-s text-gray-200">
-                {task.subtasks.filter(task => task.isCompleted).length} out of {task.subtasks.length} sub-tasks
-              </p>
-            )}
-          </div>
+            task={task}
+            setShowModal={() => loadTask(task)}
+          />
         )
       })}
+
+      {showTaskDetailsModal && (
+        <TaskDetailsModal
+          setShowModal={setShowTaskDetailsModal}
+          statuses={statuses}
+        />
+      )}
     </>
+
   )
 };

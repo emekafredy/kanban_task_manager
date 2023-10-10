@@ -6,6 +6,7 @@ import { ColumnFormModal } from "../../components/ColumnFormModal";
 
 export const BoardData:FC<IBoardDataProps> = ({board}) => {
   const [showColumnFormModal, setshowColumnFormModal] = useState<boolean>(false);
+  const [statuses] = useState<string[]>(board?.columns?.map(column => column.name));
 
   return (
     <>
@@ -17,7 +18,10 @@ export const BoardData:FC<IBoardDataProps> = ({board}) => {
                 key={i}
                 className="mx-4 my-8"
               >
-                <BoardColumn column={column} />
+                <BoardColumn
+                  column={column}
+                  statuses={statuses}
+                />
               </div>
             )
           })

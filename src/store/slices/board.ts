@@ -13,7 +13,6 @@ const initialState: BoardsProps = {
   boardName: '',
   board: {
     name: '',
-    statuses: [],
     columns: []
   }
 }

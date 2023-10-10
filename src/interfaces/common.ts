@@ -21,6 +21,8 @@ export interface IModalProps {
   children: React.ReactNode;
   setFooter?: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  closeBTN?: boolean;
+  // setShowOptions: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface ISVGProps {

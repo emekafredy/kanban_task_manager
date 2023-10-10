@@ -25,6 +25,7 @@ export interface IBoardColumnProps {
       }[]
     }[],
   };
+  statuses: string[];
 };
 
 export interface IBoardFormModalProps {

@@ -66,12 +66,12 @@ export default {
       normal: '0',
       wide: '2.4px',
     },
-    lineHeight: {
-      3: '300px',
-      4: '400px',
-      5: '500px',
-      6: '600px',
-    },
+    extend: {
+      lineHeight: {
+        'extra-loose': '2.5',
+        '12': '3rem',
+      }
+    }
   },
   plugins: [],
 }

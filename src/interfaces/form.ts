@@ -22,5 +22,7 @@ export interface ISelectProps {
   formTitle: string;
   optionsData: string[] | any[] | undefined;
   selected: string;
-  setSelected: React.Dispatch<React.SetStateAction<string>>
+  setSelected: React.Dispatch<React.SetStateAction<string>>;
+  mode?: string;
+  handleTaskStatusUpdate?: (change: string, status: string) => void;
 }
