@@ -36,7 +36,6 @@ export interface ITaskCardProps {
 
 export interface ITaskDetailsModalProps {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-  statuses: string[];
 }
 
 export interface IUpdateTaskProps {

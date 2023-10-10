@@ -14,12 +14,12 @@ import { renderSuccessMessage, renderErrorMessage } from "../../helper/toaster";
 
 export const TaskDetailsModal:FC<ITaskDetailsModalProps> = ({
   setShowModal: setShowTaskDetailsModal,
-  statuses
 }) => {
   const { board, boards } = useSelector(getAllBoardsState);
   const { task } = useSelector(getTasksState);
   const dispatch = useDispatch();
   const [selectedStatus, setSelectedStatus] = useState(task.status || '');
+  const [statuses] = useState<string[]>((board && board.columns.map(col => col.name)) || []);
 
   const handleTaskUpdate = async (change: string, status: string | '', subtask?: SubtaskProps) => {
     try {

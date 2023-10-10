@@ -6,43 +6,47 @@ import { z } from "zod";
 import { Modal } from "../Common/Modal";
 import { Input } from "../Common/Forms/Input";
 import { Button } from "../Common/Forms/Button";
-import { getAllBoardsState, setBoards } from "../../store/slices/board";
+import { getAllBoardsState, setBoards, setSingleBoard } from "../../store/slices/board";
 import { IBoardObjectProps } from "../../interfaces/board";
 import { IFormModalProps } from "../../interfaces/common";
-import { createBoard } from "../../crudServices/boards";
-import { newBoardFormSchema } from "../../validation/boardSchema";
+import { createColumn } from "../../crudServices/columns";
+import { newColumnFormSchema } from "../../validation/columnSchema";
 import { renderSuccessMessage, renderErrorMessage } from "../../helper/toaster";
+import { orderData } from "../../helper/utils";
 
-type BoardFormType = z.infer<typeof newBoardFormSchema>;
+type ColumnFormType = z.infer<typeof newColumnFormSchema>;
 
 export const ColumnFormModal:FC<IFormModalProps> = ({
   setShowModal: setShowColumnFormModal
 }) => {
-  const { boards } = useSelector(getAllBoardsState);
-  const [boardColumns] = useState<string[]>(['Todo', 'Doing', 'Done']);
+  const { boards, board } = useSelector(getAllBoardsState);
   const [loading, setLoading] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<BoardFormType>({
-    resolver: zodResolver(newBoardFormSchema),
+  } = useForm<ColumnFormType>({
+    resolver: zodResolver(newColumnFormSchema),
   });
   const dispatch = useDispatch();
 
-  const saveColumnHandler = async (data: BoardFormType) => {
+  const saveColumnHandler = async (data: ColumnFormType) => {
     try {
       setLoading(true);
-      const newBoard = await createBoard({
+      const updatedBoard = await createColumn({
         name: data.name,
-        columns: boardColumns,
+        board,
         boards
       })
-    
-      await dispatch(setBoards([...boards, newBoard] as IBoardObjectProps[]));
+
+      const index = await boards.findIndex((b) => b.name === updatedBoard.name)
+      const currentBoards = await orderData(index, boards, updatedBoard)
+
+      await dispatch(setSingleBoard(updatedBoard as IBoardObjectProps));
+      await dispatch(setBoards([...currentBoards] as IBoardObjectProps[]));
       setLoading(false);
       setShowColumnFormModal(false);
-      renderSuccessMessage('Board saved successfully');
+      renderSuccessMessage('Column saved successfully');
     } catch (err) {
       renderErrorMessage()
     }
@@ -70,7 +74,7 @@ export const ColumnFormModal:FC<IFormModalProps> = ({
             <Button
               purple
               buttonType="submit"
-              title="Create New Column"
+              title="Create Column"
               fullwidth
               roundedBG
               disabled={loading}

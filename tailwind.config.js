@@ -32,7 +32,8 @@ export default {
       'silver': {
         100: '#F4F7FD',
         200: '#E4EBFA',
-        300: '#635FC71A'
+        300: '#635FC71A',
+        400: '#E9EFFA80'
       },
       'red': {
         100: '#FF9898',

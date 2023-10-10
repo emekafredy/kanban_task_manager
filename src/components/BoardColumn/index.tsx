@@ -7,8 +7,7 @@ import { TaskDetailsModal } from "../TaskDetailsModal";
 import { setTask } from "../../store/slices/task";
 
 export const BoardColumn:FC<IBoardColumnProps> = ({
-  column,
-  statuses
+  column
 }) => {
   const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false);
   const dispatch = useDispatch();
@@ -43,7 +42,6 @@ export const BoardColumn:FC<IBoardColumnProps> = ({
       {showTaskDetailsModal && (
         <TaskDetailsModal
           setShowModal={setShowTaskDetailsModal}
-          statuses={statuses}
         />
       )}
     </>
