@@ -6,7 +6,7 @@ export default {
   darkMode: "class",
   theme: {
     screens: {
-      'sm-mobile': '350px',
+      'sm-mobile': '200px',
       'mobile': '640px',
       'tablet': '768px',
       'laptop': '1200px',
@@ -25,10 +25,15 @@ export default {
         400: '#000112',
         500: '#000000'
       },
-      'gray': '#828FA3',
+      'gray': {
+        100: '#828FA340',
+        200: '#828FA3'
+      },
       'silver': {
         100: '#F4F7FD',
-        200: '#E4EBFA'
+        200: '#E4EBFA',
+        300: '#635FC71A',
+        400: '#E9EFFA80'
       },
       'red': {
         100: '#FF9898',
@@ -62,12 +67,12 @@ export default {
       normal: '0',
       wide: '2.4px',
     },
-    lineHeight: {
-      3: '300px',
-      4: '400px',
-      5: '500px',
-      6: '600px',
-    },
+    extend: {
+      lineHeight: {
+        'extra-loose': '2.5',
+        '12': '3rem',
+      }
+    }
   },
   plugins: [],
 }

@@ -14,4 +14,15 @@ export interface IGroupInputProps {
   value: string | number;
   handleChange: (e: any) => void;
   inputId: string;
+  placeholder?: string;
+}
+
+export interface ISelectProps {
+  formLabel: string;
+  formTitle: string;
+  optionsData: string[] | any[] | undefined;
+  selected: string;
+  setSelected: React.Dispatch<React.SetStateAction<string>>;
+  mode?: string;
+  handleTaskStatusUpdate?: (change: string, status: string) => void;
 }

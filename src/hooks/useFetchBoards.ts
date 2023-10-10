@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { setBoards } from "../store/slices/board";
-import { getBoards } from "../services/boards";
+import { getBoards } from "../crudServices/boards";
 import { IBoardObjectProps } from "../interfaces/board";
  
 export const useFetchBoards = () => {

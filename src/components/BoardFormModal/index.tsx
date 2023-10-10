@@ -8,15 +8,16 @@ import { Input } from "../Common/Forms/Input";
 import { Button } from "../Common/Forms/Button";
 import { GroupInput } from "../Common/Forms/GroupInput";
 import { getAllBoardsState, setBoards } from "../../store/slices/board";
-import { IBoardObjectProps, IBoardFormModalProps } from "../../interfaces/board";
-import { createBoard } from "../../services/boards";
+import { IBoardObjectProps } from "../../interfaces/board";
+import { IFormModalProps } from "../../interfaces/common";
+import { createBoard } from "../../crudServices/boards";
 import { newBoardFormSchema } from "../../validation/boardSchema";
 import { renderSuccessMessage, renderErrorMessage } from "../../helper/toaster";
 
 type BoardFormType = z.infer<typeof newBoardFormSchema>;
 
-export const BoardFormModal:FC<IBoardFormModalProps> = ({
-  setShowModal
+export const BoardFormModal:FC<IFormModalProps> = ({
+  setShowModal: setShowBoardFormModal
 }) => {
   const { boards } = useSelector(getAllBoardsState);
   const [boardColumns, setBoardColumns] = useState<string[]>(['Todo', 'Doing', 'Done']);
@@ -38,10 +39,10 @@ export const BoardFormModal:FC<IBoardFormModalProps> = ({
         columns: boardColumns,
         boards
       })
-    
+
       await dispatch(setBoards([...boards, newBoard] as IBoardObjectProps[]));
       setLoading(false);
-      setShowModal(false);
+      setShowBoardFormModal(false);
       renderSuccessMessage('Board saved successfully');
     } catch (err) {
       renderErrorMessage()
@@ -55,16 +56,18 @@ export const BoardFormModal:FC<IBoardFormModalProps> = ({
 
   const handleRemoveColumn = (e: any, val: string) => {
     e.preventDefault();
-    setBoardColumns(prev => {
-      return prev.filter(column => column !== val);
-    })
+    const filteredBoardColumns = boardColumns.filter((col) => col != val);
+    setBoardColumns([...filteredBoardColumns])
   }
 
   const handleColumnChange = (e: any) => {
     const {id, value} = e.target;
-    const filteredBoardColumns = boardColumns.filter((_col, i) => i != id)
+    let columns = [...boardColumns];
+    let column = columns[Number(id)];
+    column = value;
+    columns[Number(id)] = column;
 
-    setBoardColumns([...filteredBoardColumns, value]);
+    setBoardColumns([...columns]);
   }
 
   return (
@@ -87,7 +90,7 @@ export const BoardFormModal:FC<IBoardFormModalProps> = ({
 
 
           <label
-            className="block text-gray text-s font-semibold mb-2 mt-8"
+            className="block text-gray-200 text-s font-semibold mb-2 mt-8"
             htmlFor="columns"
           >
             Columns
@@ -105,7 +108,7 @@ export const BoardFormModal:FC<IBoardFormModalProps> = ({
             )
           })}
 
-          <div>
+          <div className="mb-4">
             <Button
               silver
               buttonType="button"
@@ -129,7 +132,7 @@ export const BoardFormModal:FC<IBoardFormModalProps> = ({
           </div>
         </form>
       }
-      setShowModal={setShowModal}
+      setShowModal={setShowBoardFormModal}
     />
   )
 };

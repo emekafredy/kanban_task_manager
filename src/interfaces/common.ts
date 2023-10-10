@@ -21,6 +21,8 @@ export interface IModalProps {
   children: React.ReactNode;
   setFooter?: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  closeBTN?: boolean;
+  // setShowOptions: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface ISVGProps {
@@ -30,3 +32,7 @@ export interface ISVGProps {
 export interface IDotSVGProps {
   status: string;
 }
+
+export interface IFormModalProps {
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
