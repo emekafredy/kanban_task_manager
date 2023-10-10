@@ -1,5 +1,6 @@
 import { IBoardObjectProps } from "../interfaces/board";
 import { orderData } from "../helper/utils";
+import { checkDuplicate } from "../validation/input";
 
 interface ICreateColumnProps {
   name: string;
@@ -15,6 +16,11 @@ export const createColumn = async ({
   const newColumn = {
     name,
     tasks: []
+  }
+
+  const duplicate = checkDuplicate(board.columns, name);
+  if (duplicate) {
+    throw new Error('Column already exists for board: ' + board.name);
   }
 
   const boardColumns = [...board.columns, newColumn]

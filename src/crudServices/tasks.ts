@@ -7,11 +7,16 @@ import {
   SubtaskProps
 } from "../interfaces/task";
 import { orderData } from "../helper/utils";
+import { checkDuplicate } from "../validation/input";
 
 const modifyBoardData = (board: IBoardObjectProps, newTask: TaskProps, status: string) => {
   let selectedColumn = board.columns.find(c => c.name === status) as IColumnProps;
+  const columnIndex = board.columns.findIndex((c) => c.name === selectedColumn.name);
 
-  const columnIndex = board.columns.findIndex((c) => c.name === selectedColumn.name)
+  const duplicate = checkDuplicate(selectedColumn.tasks, newTask.title);
+  if (duplicate) {
+    throw new Error('Task name already exists for column: ' + selectedColumn.name);
+  }
   
   selectedColumn = {
     name: selectedColumn.name,

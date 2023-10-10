@@ -1,5 +1,6 @@
 import boardsData from "../data/data.json";
 import { IBoardObjectProps } from "../interfaces/board";
+import { checkDuplicate } from "../validation/input";
 
 interface ICreateBoardProps {
   name: string;
@@ -36,6 +37,11 @@ export const createBoard = async ({
       tasks: []
     }
   })
+
+  const duplicate = checkDuplicate(boards, name);
+  if (duplicate) {
+    throw new Error('Board name already exists');
+  }
 
   const newBoard = { name, columns: boardColumns };
   const newBoardsData = {boards: [...boards, newBoard]};

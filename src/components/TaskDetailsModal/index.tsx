@@ -41,7 +41,7 @@ export const TaskDetailsModal:FC<ITaskDetailsModalProps> = ({
       await dispatch(setBoards([...currentBoards] as IBoardObjectProps[]));
       renderSuccessMessage('Task updated successfully');
     } catch (err) {
-      renderErrorMessage();
+      renderErrorMessage(err as Error);
     }
   }
 

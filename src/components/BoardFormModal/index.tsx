@@ -45,7 +45,8 @@ export const BoardFormModal:FC<IFormModalProps> = ({
       setShowBoardFormModal(false);
       renderSuccessMessage('Board saved successfully');
     } catch (err) {
-      renderErrorMessage()
+      setLoading(false);
+      renderErrorMessage(err as Error);
     }
   };
 

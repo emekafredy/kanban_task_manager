@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 
-export const renderErrorMessage = (error = 'An error occured. Please try again') => {
-  toast.error(error);
+export const renderErrorMessage = (error: Error) => {
+  toast.error(error.message);
 };
 
 export const renderSuccessMessage = (

@@ -29,7 +29,6 @@ export const ColumnFormModal:FC<IFormModalProps> = ({
     resolver: zodResolver(newColumnFormSchema),
   });
   const dispatch = useDispatch();
-
   const saveColumnHandler = async (data: ColumnFormType) => {
     try {
       setLoading(true);
@@ -37,7 +36,7 @@ export const ColumnFormModal:FC<IFormModalProps> = ({
         name: data.name,
         board,
         boards
-      })
+      });
 
       const index = await boards.findIndex((b) => b.name === updatedBoard.name)
       const currentBoards = await orderData(index, boards, updatedBoard)
@@ -48,7 +47,8 @@ export const ColumnFormModal:FC<IFormModalProps> = ({
       setShowColumnFormModal(false);
       renderSuccessMessage('Column saved successfully');
     } catch (err) {
-      renderErrorMessage()
+      setLoading(false);
+      renderErrorMessage(err as Error)
     }
   };
 

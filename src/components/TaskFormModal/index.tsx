@@ -65,7 +65,7 @@ export const TaskFormModal:FC<IFormModalProps> = ({
       renderSuccessMessage('Task saved successfully');
     } catch (err) {
       setLoading(false);
-      renderErrorMessage();
+      renderErrorMessage(err as Error);
     }
   };
 

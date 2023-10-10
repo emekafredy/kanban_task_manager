@@ -16,7 +16,8 @@ export default {
       'white': '#FFFFFF',
       'purple': {
         100: '#A8A4FF',
-        200: '#635FC7'
+        200: '#635FC7',
+        300: '#4E2A84'
       },
       'black': {
         100: '#3E3F4E',

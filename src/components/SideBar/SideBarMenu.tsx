@@ -65,7 +65,7 @@ export const SideBarMenu = ({
             >
               <BoardSVG color={"#635FC7"} />
               <AddSVG color={"#635FC7"} />
-              <span className="ml-[-12px] text-purple-200 flex">
+              <span className="ml-[-12px] text-purple-200 hover:text-purple-100 transition duration-300 flex">
                 Create New Board
               </span>
             </li>

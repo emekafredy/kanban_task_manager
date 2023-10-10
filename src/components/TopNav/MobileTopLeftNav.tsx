@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import MobileLogoIcon from "../../assets/icons/logo-mobile.svg";
 import ChevronDownIcon from "../../assets/icons/icon-chevron-down.svg";
 import ChevronUpIcon from "../../assets/icons/icon-chevron-up.svg";
@@ -12,6 +12,12 @@ export const MobileTopLeftNav:FC<IMobileTopLeftNavProps> = ({
 }) => {
   const [showMobileSideBar, setShowMobileSidebar] = useState<boolean>(false);
   const [showAddNewBoardModal, setShowAddNewBoardModal] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (showAddNewBoardModal) {
+      setShowMobileSidebar(false)
+    }
+  }, [showAddNewBoardModal])
 
   return (
     <>
