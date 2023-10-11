@@ -6,7 +6,7 @@ import { BoardData } from "./BoardData";
 
 export const Board = () => {
   const { boards, board } = useSelector(getAllBoardsState);
-  const selectedBoard = board || boards[0]
+  const selectedBoard = board || boards[0];
 
   return (
     <>

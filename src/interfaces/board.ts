@@ -1,3 +1,8 @@
+export interface IBoardObjectPropsResponse<T> {
+  data: T;
+  message: string;
+}
+
 export interface IBoardObjectProps {
   name: string;
   columns: {
@@ -34,3 +39,16 @@ export interface IBoardFormModalProps {
 export interface IBoardDataProps {
   board: IBoardObjectProps
 }
+
+export interface ICreateBoardProps {
+  name: string;
+  columns: {
+    name: string;
+    tasks: []
+  }[];
+  boards: IBoardObjectProps[]
+}
+
+export interface IUpdateBoardProps extends ICreateBoardProps {
+  board: IBoardObjectProps
+};

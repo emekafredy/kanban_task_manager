@@ -9,3 +9,9 @@ export const renderSuccessMessage = (
 ): void => {
   toast.success(message);
 };
+
+export const renderInfoMessage = (
+  message: string
+): void => {
+  toast.info(message);
+};

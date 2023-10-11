@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { AddSVG, } from "../../components/Common/SVG/AddSVG";
-import { ColumnFormModal } from "../../components/ColumnFormModal";
+import { BoardFormModal } from "../../components/BoardFormModal";
 
 export const NoColumn = () => {
-  const [showColumnFormModal, setshowColumnFormModal] = useState<boolean>(false);
+  const [showEditBoardFormModal, setShowEditBoardFormModal] = useState<boolean>(false);
 
   return (
     <div className="flex items-center justify-center overflow-auto bg-silver-100 dark:bg-black-300 h-screen">
@@ -15,15 +15,15 @@ export const NoColumn = () => {
           type="button"
           className="text-white bg-purple-200 rounded-full px-5 py-3 
             inline-flex items-center font-extrabold mr-4"
-          onClick={() => setshowColumnFormModal(true)}
+          onClick={() => setShowEditBoardFormModal(true)}
         >
           <AddSVG color={"#FFFFFF"} />
           <span className="tablet:inline sm-mobile:hidden text-s ml-1">Add New Column</span>
         </button>
       </div>
 
-      {showColumnFormModal && (
-        <ColumnFormModal setShowModal={setshowColumnFormModal}/>
+      {showEditBoardFormModal && (
+        <BoardFormModal setShowModal={setShowEditBoardFormModal} mode="update"/>
       )}
     </div>
   )

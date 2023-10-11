@@ -35,4 +35,5 @@ export interface IDotSVGProps {
 
 export interface IFormModalProps {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  mode?: string;
 };
