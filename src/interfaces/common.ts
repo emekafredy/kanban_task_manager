@@ -59,4 +59,5 @@ export interface IOptionsMenuProps {
   setShowPrevModal: React.Dispatch<React.SetStateAction<boolean>>;
   board?: boolean;
   task?: boolean;
+  setShowTaskDetailsModal?: React.Dispatch<React.SetStateAction<boolean>>;
 }

@@ -22,7 +22,7 @@ export const SideBarMenu = ({
   }
 
   useEffect(() => {
-    handleSelectBoard()
+    if (activeBoard) handleSelectBoard()
   }, [activeBoard])
 
   return (

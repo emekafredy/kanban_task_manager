@@ -4,7 +4,7 @@ import { Modal } from "../../Common/Modal";
 import { ITaskDetailsModalProps, SubtaskProps, TaskProps } from "../../../interfaces/task";
 import { Select } from "../../Common/Forms/Select";
 import { getAllBoardsState } from "../../../store/slices/board";
-import { updateTask } from "../../../crudServices/task";
+import { patchTask } from "../../../crudServices/task";
 import { orderData } from "../../../helper/utils";
 import { setBoards, setSingleBoard } from "../../../store/slices/board";
 import { setTask } from "../../../store/slices/task";
@@ -17,6 +17,7 @@ import { TaskInfo } from "./TaskInfo";
 
 export const TaskDetailsModal:FC<ITaskDetailsModalProps> = ({
   setShowModal: setShowTaskDetailsModal,
+  setShowDeleteTaskModal: setShowDeleteTaskModal
 }) => {
   const { board, boards } = useSelector(getAllBoardsState);
   const { task } = useSelector(getTasksState);
@@ -27,11 +28,10 @@ export const TaskDetailsModal:FC<ITaskDetailsModalProps> = ({
   const [statuses] = useState<string[]>((board && board.columns.map(col => col.name)) || []);
 
   const [showEditTaskFormModal, setShowEditTaskFormModal] = useState<boolean>(false);
-  const [showDeleteTaskModal, setShowDeleteTaskModal] = useState<boolean>(false);
 
   const handleTaskUpdate = async (change: string, status: string | '', subtask?: SubtaskProps) => {
     try {
-      const [updatedBoard, updatedTask] = await updateTask({
+      const [updatedBoard, updatedTask] = await patchTask({
         board,
         boards,
         change,
@@ -86,6 +86,7 @@ export const TaskDetailsModal:FC<ITaskDetailsModalProps> = ({
             setShowEditModal={setShowEditTaskFormModal}
             setShowDeleteModal={setShowDeleteTaskModal}
             setShowPrevModal={setShowTaskMenuOptions}
+            setShowTaskDetailsModal={setShowTaskDetailsModal}
             task
           />
         }
@@ -93,10 +94,6 @@ export const TaskDetailsModal:FC<ITaskDetailsModalProps> = ({
 
       {showEditTaskFormModal && (
         <TaskFormModal setShowModal={setShowEditTaskFormModal} mode="update"/>
-      )}
-
-      {showDeleteTaskModal && (
-        <TaskFormModal setShowModal={setShowDeleteTaskModal} mode="update"/>
       )}
     </>
   )

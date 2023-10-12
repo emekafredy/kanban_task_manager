@@ -5,11 +5,13 @@ import { DotSVG } from "../../Common/SVG/DotSVG";
 import { TaskCard } from "./TaskCard";
 import { TaskDetailsModal } from "../../Task/TaskDetailsModal";
 import { setTask } from "../../../store/slices/task";
+import { DeleteTaskModal } from "../../Task/DeleteTaskModal";
 
 export const BoardColumn:FC<IBoardColumnProps> = ({
   column
 }) => {
   const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false);
+  const [showDeleteTaskModal, setShowDeleteTaskModal] = useState<boolean>(false);
   const dispatch = useDispatch();
 
   const loadTask = async (task: any) => {
@@ -42,9 +44,13 @@ export const BoardColumn:FC<IBoardColumnProps> = ({
       {showTaskDetailsModal && (
         <TaskDetailsModal
           setShowModal={setShowTaskDetailsModal}
+          setShowDeleteTaskModal={setShowDeleteTaskModal}
         />
       )}
-    </>
 
+      {showDeleteTaskModal && (
+        <DeleteTaskModal setShowModal={setShowDeleteTaskModal}/>
+      )}
+    </>
   )
 };

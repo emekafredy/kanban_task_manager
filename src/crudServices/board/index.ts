@@ -2,6 +2,7 @@ import boardsData from "../../data/data.json";
 import { IBoardObjectProps, IBoardObjectPropsResponse, ICreateBoardProps, IUpdateBoardProps } from "../../interfaces/board";
 import { checkNewDuplicate, checkExistingDuplicate, duplicatesInArry } from "../../validation/input";
 import { orderData, valueChanged, valuesChanged } from "../../helper/utils";
+import { throwBoardError } from "./boardHelpers";
 
 export const getBoards = async (): Promise<IBoardObjectProps[]> => {
   if (!localStorage.boards || JSON.parse(localStorage.boards).length === 0) {
@@ -21,18 +22,6 @@ export const getSingleBoard = async (boardName: string | null | undefined): Prom
     return result;
 };
 
-export const throwErrorBoardError = (
-  columns: {name: string, tasks: []}[],
-  columnDuplicates: boolean,
-  exitingBoardName: boolean
-) => {
-  if (columns.length > 6) throw new Error('Board can only have 6 columns');
-  if (columnDuplicates) throw new Error('Board column names must be unique');
-  if (exitingBoardName) throw new Error('Board name already exists');
-
-  return;
-}
-
 export const createBoard = async ({
   name,
   columns,
@@ -41,7 +30,7 @@ export const createBoard = async ({
   const existingBoardName = checkNewDuplicate(boards, name);
   const columnDuplicates = duplicatesInArry(columns);
 
-  throwErrorBoardError(columns, columnDuplicates, existingBoardName);
+  throwBoardError(columns, columnDuplicates, existingBoardName);
 
   const newBoard = { name, columns };
   const newBoardsData = {boards: [...boards, newBoard]};
@@ -59,12 +48,13 @@ export const updateBoard = async ({
   const existingColumnNames = board.columns.map(col => col.name);
   const inputColumnNames = columns.map(col => col.name);
 
-  const nameChanged = await valueChanged(board.name, name);
-  const columnsChanged = await valuesChanged(existingColumnNames, inputColumnNames);
   const columnDuplicates = duplicatesInArry(columns);
   const existingBoardName = checkExistingDuplicate(boards, board.name, name);
+  
+  throwBoardError(columns, columnDuplicates, existingBoardName);
 
-  throwErrorBoardError(columns, columnDuplicates, existingBoardName);
+  const nameChanged = await valueChanged(board.name, name);
+  const columnsChanged = await valuesChanged(existingColumnNames, inputColumnNames);
 
   if (nameChanged || columnsChanged) {
     const boardColumnsUpdate = columns.map(column => {

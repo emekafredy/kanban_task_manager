@@ -9,7 +9,8 @@ export const OptionsMenu:FC<IOptionsMenuProps> = ({
   setShowDeleteModal,
   setShowPrevModal,
   board,
-  task
+  task,
+  setShowTaskDetailsModal
 }) => {
   const classes = className("absolute py-3 pl-6 pr-20 bg-white dark:bg-black-300 rounded-lg text-left", {
     "right-4 top-17": board,
@@ -31,9 +32,10 @@ export const OptionsMenu:FC<IOptionsMenuProps> = ({
       </li>
       <li
         className="text-s text-justify py-2 text-red-200 cursor-pointer font-bold"
-        onClick={() => {
-          setShowDeleteModal(true);
-          setShowPrevModal(false);
+        onClick={async () => {
+          await setShowDeleteModal(true);
+          await setShowPrevModal(false);
+          setShowTaskDetailsModal?.(false);
         }}
       >
           {deleteText}
