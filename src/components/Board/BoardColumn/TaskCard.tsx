@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ITaskCardProps } from "../../interfaces/task";
+import { ITaskCardProps } from "../../../interfaces/task";
 
 export const TaskCard:FC<ITaskCardProps> = ({
   task,

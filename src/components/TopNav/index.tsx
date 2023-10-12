@@ -10,8 +10,10 @@ import { useTheme } from "../../hooks/useTheme";
 
 import { getAllBoardsState } from "../../store/slices/board";
 import { useFetchBoards } from "../../hooks/useFetchBoards";
-import { TaskFormModal } from "../TaskFormModal";
-import { BoardFormModal } from "../BoardFormModal";
+import { TaskFormModal } from "../Task/TaskFormModal";
+import { BoardFormModal } from "../Board/BoardFormModal";
+import { DeleteBoardModal } from "../Board/DeleteBoardModal";
+import { OptionsMenu } from "../Common/OptionsMenu";
 
 export const TopNav = ({
   sideBarVisible,
@@ -21,7 +23,7 @@ export const TopNav = ({
   const [showAddNewTaskFormModal, setshowAddNewTaskFormModal] = useState<boolean>(false);
   const [showBoardMenu, setShowBoardMenu] = useState<boolean>(false);
   const [showEditBoardFormModal, setShowEditBoardFormModal] = useState<boolean>(false);
-  const [showDeleteBoardFormModal, setShowDeleteBoardFormModal] = useState<boolean>(false);
+  const [showDeleteBoardModal, setShowDeleteBoardModal] = useState<boolean>(false);
 
   const { loading } = useFetchBoards();
   useTheme();
@@ -46,7 +48,7 @@ export const TopNav = ({
         ) : (
           <>
             <div className="flex justify-between">
-              <MobileTopLeftNav title={boardName || boards[0]?.name}/>
+              <MobileTopLeftNav title={board?.name || boardName || boards[0]?.name}/>
               <TopLeftNav
                 colorTheme={colorTheme}
                 sideBarVisible={sideBarVisible}
@@ -58,7 +60,7 @@ export const TopNav = ({
                   type="button"
                   className="text-white bg-purple-200 rounded-full px-5 py-3 
                     inline-flex items-center font-extrabold mr-4 disabled:opacity-50"
-                  disabled={selectedBoard?.columns.length === 0}
+                  disabled={selectedBoard && selectedBoard?.columns.length === 0}
                   onClick={() => setshowAddNewTaskFormModal(true)}
                 >
                   <AddSVG color={"#FFFFFF"}/>
@@ -67,33 +69,21 @@ export const TopNav = ({
 
                 <img
                   src={Elipses}
-                  className="h-6 cursor-pointer"
+                  className="h-5 cursor-pointer mr-4 ml-2"
                   alt="board-options"
                   onClick={() => setShowBoardMenu(!showBoardMenu)}
                 />
               </div>
             </div>
             {showBoardMenu && (
-              <ul className="fixed right-4 py-2 pl-3 pr-16 bg-white dark:bg-black-200 rounded-lg text-left">
-                <li
-                  className="text-s text-justify py-2 text-gray-200 cursor-pointer hover:text-black-200 dark:hover:text-silver-200 font-bold"
-                  onClick={() => {
-                    setShowEditBoardFormModal(true);
-                    setShowBoardMenu(false);
-                  }}
-                >
-                  Edit Board
-                </li>
-                <li
-                  className="text-s text-justify py-2 text-red-200 cursor-pointer font-bold"
-                  onClick={() => {
-                    setShowDeleteBoardFormModal(true);
-                    setShowBoardMenu(false);
-                  }}
-                >
-                    Delete Board
-                </li>
-              </ul>
+              <OptionsMenu
+                editText="Edit Board"
+                deleteText="Delete Board"
+                setShowEditModal={setShowEditBoardFormModal}
+                setShowDeleteModal={setShowDeleteBoardModal}
+                setShowPrevModal={setShowBoardMenu}
+                board
+              />
             )}
           </>
         )}
@@ -106,8 +96,8 @@ export const TopNav = ({
         <BoardFormModal setShowModal={setShowEditBoardFormModal} mode="update"/>
       )}
 
-      {showDeleteBoardFormModal && (
-        <BoardFormModal setShowModal={setShowDeleteBoardFormModal} mode="update"/>
+      {showDeleteBoardModal && (
+        <DeleteBoardModal setShowModal={setShowDeleteBoardModal} />
       )}
     </>
   )

@@ -4,17 +4,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Modal } from "../Common/Modal";
-import { Input } from "../Common/Forms/Input";
-import { Button } from "../Common/Forms/Button";
-import { GroupInput } from "../Common/Forms/GroupInput";
-import { getAllBoardsState, setBoards, setSingleBoard } from "../../store/slices/board";
-import { IBoardObjectProps } from "../../interfaces/board";
-import { IFormModalProps } from "../../interfaces/common";
-import { createBoard, updateBoard } from "../../crudServices/boards";
-import { newBoardFormSchema } from "../../validation/boardSchema";
-import { renderSuccessMessage, renderErrorMessage, renderInfoMessage } from "../../helper/toaster";
-import { orderData, checkExistingColumn } from "../../helper/utils";
+import { Modal } from "../../Common/Modal";
+import { Input } from "../../Common/Forms/Input";
+import { Button } from "../../Common/Forms/Button";
+import { GroupInput } from "../../Common/Forms/GroupInput";
+import { getAllBoardsState, setBoards, setSingleBoard } from "../../../store/slices/board";
+import { IBoardObjectProps } from "../../../interfaces/board";
+import { IFormModalProps } from "../../../interfaces/common";
+import { createBoard, updateBoard } from "../../../crudServices/board";
+import { newBoardFormSchema } from "../../../validation/boardSchema";
+import { renderSuccessMessage, renderErrorMessage, renderInfoMessage } from "../../../helper/toaster";
+import { orderData, checkExistingColumn } from "../../../helper/utils";
 
 type BoardFormType = z.infer<typeof newBoardFormSchema>;
 
@@ -144,10 +144,9 @@ export const BoardFormModal:FC<IFormModalProps> = ({
           >
             Columns
           </label>
-
           {boardColumns.map((col, i) => {
             const hasTasks = checkExistingColumn(mode, col, exisitingColumns);
-            console.log(hasTasks)
+
             return (
               <GroupInput
                 key={i}

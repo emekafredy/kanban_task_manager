@@ -1,10 +1,10 @@
 import { FC, useState } from "react";
 import { useDispatch } from "react-redux";
-import { IBoardColumnProps } from "../../interfaces/board";
-import { DotSVG } from "../Common/SVG/DotSVG";
+import { IBoardColumnProps } from "../../../interfaces/board";
+import { DotSVG } from "../../Common/SVG/DotSVG";
 import { TaskCard } from "./TaskCard";
-import { TaskDetailsModal } from "../TaskDetailsModal";
-import { setTask } from "../../store/slices/task";
+import { TaskDetailsModal } from "../../Task/TaskDetailsModal";
+import { setTask } from "../../../store/slices/task";
 
 export const BoardColumn:FC<IBoardColumnProps> = ({
   column

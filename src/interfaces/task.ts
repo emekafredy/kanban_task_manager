@@ -15,7 +15,7 @@ export interface TaskProps {
 export interface ICreateTaskProps {
   title: string;
   description: string;
-  subtasks?: string[];
+  subtasks?: SubtaskProps[];
   status: string;
   board: IBoardObjectProps;
   boards: IBoardObjectProps[]
@@ -46,4 +46,17 @@ export interface IUpdateTaskProps {
   task: TaskProps;
   status: string;
   prevStatus?: string;
+  column?: IColumnProps;
+  title?: string;
+  description?: string;
+  subtasks?: SubtaskProps[]
+}
+
+export interface ITaskInfoProps {
+  task: TaskProps;
+  handleTaskUpdate: (
+    change: string,
+    status: string,
+    subtask?: SubtaskProps
+  ) => void;
 }

@@ -1,7 +1,7 @@
-import boardsData from "../data/data.json";
-import { IBoardObjectProps, IBoardObjectPropsResponse, ICreateBoardProps, IUpdateBoardProps } from "../interfaces/board";
-import { checkNewDuplicate, checkExistingDuplicate, duplicatesInArry } from "../validation/input";
-import { orderData, valueChanged, valuesChanged } from "../helper/utils";
+import boardsData from "../../data/data.json";
+import { IBoardObjectProps, IBoardObjectPropsResponse, ICreateBoardProps, IUpdateBoardProps } from "../../interfaces/board";
+import { checkNewDuplicate, checkExistingDuplicate, duplicatesInArry } from "../../validation/input";
+import { orderData, valueChanged, valuesChanged } from "../../helper/utils";
 
 export const getBoards = async (): Promise<IBoardObjectProps[]> => {
   if (!localStorage.boards || JSON.parse(localStorage.boards).length === 0) {
@@ -21,7 +21,11 @@ export const getSingleBoard = async (boardName: string | null | undefined): Prom
     return result;
 };
 
-export const throwErrorBoardError = (columns: {name: string, tasks: []}[], columnDuplicates: boolean, exitingBoardName: boolean) => {
+export const throwErrorBoardError = (
+  columns: {name: string, tasks: []}[],
+  columnDuplicates: boolean,
+  exitingBoardName: boolean
+) => {
   if (columns.length > 6) throw new Error('Board can only have 6 columns');
   if (columnDuplicates) throw new Error('Board column names must be unique');
   if (exitingBoardName) throw new Error('Board name already exists');
@@ -84,4 +88,17 @@ export const updateBoard = async ({
   } else {
     return {data: {}, message: 'No data change detected'};
   }
+};
+
+
+export const deleteBoard = async (
+  board: IBoardObjectProps,
+  boards: IBoardObjectProps[]
+): Promise<IBoardObjectPropsResponse<any>> => {
+    
+  const filteredBoards = await boards.filter((b) => b.name !== board.name);
+  const updatedBoardsData = await {boards: [...filteredBoards]};
+  await localStorage.setItem('boards', JSON.stringify(updatedBoardsData));
+
+  return { data: filteredBoards, message: 'Board deleted successfully'};
 };

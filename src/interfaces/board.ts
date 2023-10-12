@@ -1,5 +1,5 @@
 export interface IBoardObjectPropsResponse<T> {
-  data: T;
+  data?: T;
   message: string;
 }
 

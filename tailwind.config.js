@@ -54,7 +54,7 @@ export default {
       'full': '9999px',
     },
     fontSize: {
-      s: '12px',
+      s: '13px',
       m: '15px',
       l: '18px',
       xl: '24px',

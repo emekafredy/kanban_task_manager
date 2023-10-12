@@ -11,11 +11,13 @@ export const checkExistingDuplicate = (data: any, formerName: string, name: stri
   return duplicate;
 };
 
-export const duplicatesInArry = (arr: {name: string, tasks: []}[]): boolean => {
+export const duplicatesInArry = (
+  arr: any[]
+): boolean => {
   let values: string[] = [];
 
   for (let obj of arr) {
-    const name = formatString(obj.name);
+    const name = formatString(obj.name || obj.title);
     if ((values.includes(name))) {
       return true
     }

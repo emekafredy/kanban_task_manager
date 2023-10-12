@@ -4,7 +4,7 @@ import ChevronDownIcon from "../../assets/icons/icon-chevron-down.svg";
 import ChevronUpIcon from "../../assets/icons/icon-chevron-up.svg";
 import { SideBarMenu } from "../SideBar/SideBarMenu";
 import { ThemeSwitch } from "../SideBar/ThemeSwitch";
-import { BoardFormModal } from "../BoardFormModal";
+import { BoardFormModal } from "../Board/BoardFormModal";
 import { IMobileTopLeftNavProps } from "../../interfaces/navigation";
 
 export const MobileTopLeftNav:FC<IMobileTopLeftNavProps> = ({

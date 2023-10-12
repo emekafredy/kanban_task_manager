@@ -1,8 +1,8 @@
 import { FC, useState } from "react";
 import { AddSVG } from "../../components/Common/SVG/AddSVG";
-import { BoardColumn } from "../../components/BoardColumn";
+import { BoardColumn } from "../../components/Board/BoardColumn";
 import { IBoardDataProps } from "../../interfaces/board";
-import { BoardFormModal } from "../../components/BoardFormModal";
+import { BoardFormModal } from "../../components/Board/BoardFormModal";
 
 export const BoardData:FC<IBoardDataProps> = ({board}) => {
   const [showEditBoardFormModal, setShowEditBoardFormModal] = useState<boolean>(false);
