@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { useSearchParams } from "react-router-dom";
 import { setBoardName, setSingleBoard } from "../store/slices/board";
-import { getSingleBoard } from "../crudServices/boards";
+import { getSingleBoard } from "../crudServices/board";
 
 export const useFetchSingleBoard = () => {
   const [loading, setLoading] = useState<boolean>(false);

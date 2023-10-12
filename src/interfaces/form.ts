@@ -15,6 +15,8 @@ export interface IGroupInputProps {
   handleChange: (e: any) => void;
   inputId: string;
   placeholder?: string;
+  inputDisabled?: boolean;
+  rmvBtnDisabled?: boolean;
 }
 
 export interface ISelectProps {

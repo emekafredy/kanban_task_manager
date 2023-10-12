@@ -10,7 +10,7 @@ import HideSidebarIcon from "../../assets/icons/icon-hide-sidebar.svg";
 import ShowSidebarIcon from "../../assets/icons/icon-show-sidebar.svg";
 import DarkLogoIcon from "../../assets/icons/logo-dark.svg";
 import LightLogoIcon from "../../assets/icons/logo-light.svg";
-import { BoardFormModal } from "../BoardFormModal";
+import { BoardFormModal } from "../Board/BoardFormModal";
 import { ISideBarProps } from "../../interfaces/navigation";
 
 export const SideBar:FC<ISideBarProps> = ({

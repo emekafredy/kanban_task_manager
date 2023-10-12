@@ -16,7 +16,8 @@ export default {
       'white': '#FFFFFF',
       'purple': {
         100: '#A8A4FF',
-        200: '#635FC7'
+        200: '#635FC7',
+        300: '#4E2A84'
       },
       'black': {
         100: '#3E3F4E',
@@ -53,7 +54,7 @@ export default {
       'full': '9999px',
     },
     fontSize: {
-      s: '12px',
+      s: '13px',
       m: '15px',
       l: '18px',
       xl: '24px',

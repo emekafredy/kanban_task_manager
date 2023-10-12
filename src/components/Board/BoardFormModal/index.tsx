@@ -1,27 +1,43 @@
 import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Modal } from "../Common/Modal";
-import { Input } from "../Common/Forms/Input";
-import { Button } from "../Common/Forms/Button";
-import { GroupInput } from "../Common/Forms/GroupInput";
-import { getAllBoardsState, setBoards } from "../../store/slices/board";
-import { IBoardObjectProps } from "../../interfaces/board";
-import { IFormModalProps } from "../../interfaces/common";
-import { createBoard } from "../../crudServices/boards";
-import { newBoardFormSchema } from "../../validation/boardSchema";
-import { renderSuccessMessage, renderErrorMessage } from "../../helper/toaster";
+import { Modal } from "../../Common/Modal";
+import { Input } from "../../Common/Forms/Input";
+import { Button } from "../../Common/Forms/Button";
+import { GroupInput } from "../../Common/Forms/GroupInput";
+import { getAllBoardsState, setBoards, setSingleBoard } from "../../../store/slices/board";
+import { IBoardObjectProps } from "../../../interfaces/board";
+import { IFormModalProps } from "../../../interfaces/common";
+import { createBoard, updateBoard } from "../../../crudServices/board";
+import { newBoardFormSchema } from "../../../validation/boardSchema";
+import { renderSuccessMessage, renderErrorMessage, renderInfoMessage } from "../../../helper/toaster";
+import { orderData, checkExistingColumn } from "../../../helper/utils";
 
 type BoardFormType = z.infer<typeof newBoardFormSchema>;
 
+const initialColumns = [
+  {name: "Todo", tasks: []},
+  {name: "Doing", tasks: []},
+  {name: "Done", tasks: []},
+];
+
 export const BoardFormModal:FC<IFormModalProps> = ({
-  setShowModal: setShowBoardFormModal
+  setShowModal: setShowBoardFormModal,
+  mode
 }) => {
-  const { boards } = useSelector(getAllBoardsState);
-  const [boardColumns, setBoardColumns] = useState<string[]>(['Todo', 'Doing', 'Done']);
+  const [_, setSearchParams] = useSearchParams();
+  const { boards, board } = useSelector(getAllBoardsState);
   const [loading, setLoading] = useState<boolean>(false);
+  const exisitingColumns = board?.columns;
+
+  const [boardName] = useState<string>(board?.name || '');
+  const [boardColumns, setBoardColumns] = useState<any[]>(
+    mode === "update" ? (exisitingColumns || []) : initialColumns
+  );
+
   const {
     register,
     handleSubmit,
@@ -31,7 +47,7 @@ export const BoardFormModal:FC<IFormModalProps> = ({
   });
   const dispatch = useDispatch();
 
-  const submitHandler = async (data: BoardFormType) => {
+  const createBoardHandler = async (data: BoardFormType) => {
     try {
       setLoading(true);
       const newBoard = await createBoard({
@@ -45,7 +61,38 @@ export const BoardFormModal:FC<IFormModalProps> = ({
       setShowBoardFormModal(false);
       renderSuccessMessage('Board saved successfully');
     } catch (err) {
-      renderErrorMessage()
+      setLoading(false);
+      renderErrorMessage(err as Error);
+    }
+  };
+
+  const updateBoardHandler = async (data: BoardFormType) => {
+    try {
+      setLoading(true);
+      const {data: updatedBoard, message} = await updateBoard({
+        board,
+        name: data.name,
+        columns: boardColumns,
+        boards
+      });
+
+      if (Object.keys(updatedBoard).length) {
+        const boardIndex = await boards.findIndex((b) => b.name === board.name);
+        const currentBoards = await orderData(boardIndex, boards, updatedBoard)
+  
+        await dispatch(setBoards([...currentBoards] as IBoardObjectProps[]));
+        setSearchParams({ board: updatedBoard.name as string });
+        await dispatch(setSingleBoard(updatedBoard as IBoardObjectProps));
+        renderSuccessMessage(message);
+      } else {
+        renderInfoMessage(message);
+      }
+
+      setLoading(false);
+      setShowBoardFormModal(false);
+    } catch (err) {
+      setLoading(false);
+      renderErrorMessage(err as Error);
     }
   };
 
@@ -64,7 +111,7 @@ export const BoardFormModal:FC<IFormModalProps> = ({
     const {id, value} = e.target;
     let columns = [...boardColumns];
     let column = columns[Number(id)];
-    column = value;
+    column = {name: value, tasks: []};
     columns[Number(id)] = column;
 
     setBoardColumns([...columns]);
@@ -72,11 +119,13 @@ export const BoardFormModal:FC<IFormModalProps> = ({
 
   return (
     <Modal
-      title={"Add New Board"}
+      title={mode === "update" ? "Edit Board" : "Add New Board"}
       children={
         <form
           className="p-8"
-          onSubmit={handleSubmit(submitHandler)}
+          onSubmit={
+            handleSubmit(mode === "update" ? updateBoardHandler : createBoardHandler)
+          }
         >
           <Input
             hasLabel={true}
@@ -86,8 +135,8 @@ export const BoardFormModal:FC<IFormModalProps> = ({
             inputType="text"
             placeholder="e.g. Web Design"
             register={register}
+            value={mode === "update" ? boardName : ""}
           />
-
 
           <label
             className="block text-gray-200 text-s font-semibold mb-2 mt-8"
@@ -95,15 +144,18 @@ export const BoardFormModal:FC<IFormModalProps> = ({
           >
             Columns
           </label>
-
           {boardColumns.map((col, i) => {
+            const hasTasks = checkExistingColumn(mode, col, exisitingColumns);
+
             return (
               <GroupInput
                 key={i}
                 inputId={String(i)}
                 removeInput={(e) => handleRemoveColumn(e, col)}
-                value={col}
+                value={col.name}
                 handleChange={(e) => handleColumnChange(e)}
+                inputDisabled={hasTasks}
+                rmvBtnDisabled={hasTasks}
               />
             )
           })}
@@ -124,7 +176,7 @@ export const BoardFormModal:FC<IFormModalProps> = ({
             <Button
               purple
               buttonType="submit"
-              title="Create New Board"
+              title={mode === "update" ? "Save Changes" : "Create New Board"}
               fullwidth
               roundedBG
               disabled={loading}

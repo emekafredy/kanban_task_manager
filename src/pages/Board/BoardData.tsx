@@ -1,11 +1,11 @@
 import { FC, useState } from "react";
 import { AddSVG } from "../../components/Common/SVG/AddSVG";
-import { BoardColumn } from "../../components/BoardColumn";
+import { BoardColumn } from "../../components/Board/BoardColumn";
 import { IBoardDataProps } from "../../interfaces/board";
-import { ColumnFormModal } from "../../components/ColumnFormModal";
+import { BoardFormModal } from "../../components/Board/BoardFormModal";
 
 export const BoardData:FC<IBoardDataProps> = ({board}) => {
-  const [showColumnFormModal, setshowColumnFormModal] = useState<boolean>(false);
+  const [showEditBoardFormModal, setShowEditBoardFormModal] = useState<boolean>(false);
 
   return (
     <>
@@ -26,7 +26,7 @@ export const BoardData:FC<IBoardDataProps> = ({board}) => {
         }
         <div
           className="mx-4 mt-12 mb-48"
-          onClick={() => setshowColumnFormModal(true)}
+          onClick={() => setShowEditBoardFormModal(true)}
         >
           <div className="flex items-center justify-center
             bg-gradient-to-t from-silver-400 to-silver-200
@@ -44,8 +44,8 @@ export const BoardData:FC<IBoardDataProps> = ({board}) => {
           </div>
         </div>
       </div>
-      {showColumnFormModal && (
-        <ColumnFormModal setShowModal={setshowColumnFormModal}/>
+      {showEditBoardFormModal && (
+        <BoardFormModal setShowModal={setShowEditBoardFormModal} mode="update"/>
       )}
     </>
   )
