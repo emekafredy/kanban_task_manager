@@ -1,13 +1,13 @@
-import { IBoardObjectProps } from "../../interfaces/board";
+import { IBoardObjectProps, IBoardObjectPropsResponse } from "../../interfaces/board";
 import {
   ICreateTaskProps,
-  IColumnProps,
   IUpdateTaskProps,
   TaskProps,
   SubtaskProps
 } from "../../interfaces/task";
 import { orderData, valueChanged, valuesChanged } from "../../helper/utils";
 import { checkExistingDuplicate, checkNewDuplicate, duplicatesInArry } from "../../validation/input";
+import { IColumnProps } from "../../interfaces/column";
 
 const modifyBoardData = (board: IBoardObjectProps, newTask: TaskProps, status: string) => {
   let selectedColumn = board.columns.find(c => c.name === status) as IColumnProps;
@@ -246,4 +246,29 @@ export const updateTask = async ({
   await localStorage.setItem('boards', JSON.stringify(updatedBoardsData));
 
   return [updatedBoard, updatedTask];
+};
+
+export const deleteTask = async (
+  column: IColumnProps,
+  task: TaskProps,
+  board: IBoardObjectProps,
+  boards: IBoardObjectProps[]
+): Promise<IBoardObjectPropsResponse<any>> => {
+  const filteredTasks = column.tasks.filter(t => t.title !== task.title);
+  const updatedColumn = { ...column, tasks: [...filteredTasks]}
+
+  const columnIndex = await board.columns.findIndex((c) => c.name === column.name);
+  const updatedBoardColumns = await orderData(columnIndex, board.columns, updatedColumn);
+
+  const updatedBoard = {...board, columns: updatedBoardColumns};
+  const boardIndex = await boards.findIndex((b) => b.name === board.name)
+  const updatedBoards = await orderData(boardIndex, boards, updatedBoard)
+
+  const updatedBoardsData = await {boards: [...updatedBoards]};
+  await localStorage.setItem('boards', JSON.stringify(updatedBoardsData));
+
+  return {
+    data: {board: updatedBoard, boards: updatedBoards},
+    message: 'Task deleted successfully'
+  };
 };

@@ -1,3 +1,5 @@
+import { IColumnProps } from "./column";
+
 export interface IBoardObjectPropsResponse<T> {
   data?: T;
   message: string;
@@ -5,18 +7,7 @@ export interface IBoardObjectPropsResponse<T> {
 
 export interface IBoardObjectProps {
   name: string;
-  columns: {
-    name: string;
-    tasks: {
-      title: string;
-      description: string;
-      status: string;
-      subtasks: {
-        title: string;
-        isCompleted: boolean;
-      }[]
-    }[],
-  }[];
+  columns: IColumnProps[];
 }
 
 export interface IBoardColumnProps {

@@ -1,4 +1,5 @@
 import { IBoardObjectProps } from "./board";
+import { IColumnProps } from "./column";
 
 export interface SubtaskProps {
   title: string;
@@ -21,14 +22,6 @@ export interface ICreateTaskProps {
   boards: IBoardObjectProps[]
 }
 
-export interface IColumnProps {
-  name: string;
-  tasks: {
-    title: string;
-    subtasks: SubtaskProps[]
-  }[],
-};
-
 export interface ITaskCardProps {
   task: TaskProps;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -36,6 +29,7 @@ export interface ITaskCardProps {
 
 export interface ITaskDetailsModalProps {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowDeleteTaskModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IUpdateTaskProps {
