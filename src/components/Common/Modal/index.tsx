@@ -56,7 +56,7 @@ export const Modal:FC<IModalProps> = ({
                 >
                   <img
                     src={Elipses}
-                    className="h-5 w-2 cursor-pointer"
+                    className="h-5 w-1 cursor-pointer"
                     alt="board-options"
                   />
                 </button>

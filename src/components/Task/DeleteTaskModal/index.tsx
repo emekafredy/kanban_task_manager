@@ -17,7 +17,7 @@ export const DeleteTaskModal:FC<IFormModalProps> = ({
   const { task } = useSelector(getTasksState);
   const dispatch = useDispatch();
 
-  const currentColumn = board.columns.find(c => c.name === task.status) as IColumnProps;
+  const currentColumn = board?.columns.find(c => c.name === task.status) as IColumnProps;
 
   const handleTaskDelete = async () => {
     setLoading(true);

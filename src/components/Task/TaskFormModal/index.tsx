@@ -18,8 +18,9 @@ import { createTask } from "../../../crudServices/task";
 import { setBoards, setSingleBoard } from "../../../store/slices/board";
 import { orderData } from "../../../helper/utils";
 import { getTasksState, setTask } from "../../../store/slices/task";
-import { fullyUpdateTask } from "../../../crudServices/task";
-import { IColumnProps, TaskProps } from "../../../interfaces/task";
+import { updateTask } from "../../../crudServices/task";
+import { TaskProps } from "../../../interfaces/task";
+import { IColumnProps } from "../../../interfaces/column";
 
 type TaskFormType = z.infer<typeof newTaskFormSchema>;
 
@@ -92,7 +93,7 @@ export const TaskFormModal:FC<IFormModalProps> = ({
   const updateTaskHandler = async (data: TaskFormType) => {
     try {
       setLoading(true);
-      const [updatedBoard, updatedTask] = await fullyUpdateTask(
+      const [updatedBoard, updatedTask] = await updateTask(
         board,
         currentColumn,
         task,

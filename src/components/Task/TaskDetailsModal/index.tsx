@@ -4,7 +4,7 @@ import { Modal } from "../../Common/Modal";
 import { ITaskDetailsModalProps, SubtaskProps, TaskProps } from "../../../interfaces/task";
 import { Select } from "../../Common/Forms/Select";
 import { getAllBoardsState } from "../../../store/slices/board";
-import { updateTask } from "../../../crudServices/task";
+import { patchTask } from "../../../crudServices/task";
 import { orderData } from "../../../helper/utils";
 import { setBoards, setSingleBoard } from "../../../store/slices/board";
 import { setTask } from "../../../store/slices/task";
@@ -31,7 +31,7 @@ export const TaskDetailsModal:FC<ITaskDetailsModalProps> = ({
 
   const handleTaskUpdate = async (change: string, status: string | '', subtask?: SubtaskProps) => {
     try {
-      const [updatedBoard, updatedTask] = await updateTask({
+      const [updatedBoard, updatedTask] = await patchTask({
         board,
         boards,
         change,

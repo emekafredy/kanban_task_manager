@@ -5,11 +5,9 @@ import Elipses from "../../assets/icons/icon-vertical-ellipsis.svg";
 import { getThemeState } from "../../store/slices/theme";
 import { MobileTopLeftNav } from "./MobileTopLeftNav";
 import { TopLeftNav } from "./TopLeftNav";
-import { Loader } from "../Common/Loader";
 import { useTheme } from "../../hooks/useTheme";
 
 import { getAllBoardsState } from "../../store/slices/board";
-import { useFetchBoards } from "../../hooks/useFetchBoards";
 import { TaskFormModal } from "../Task/TaskFormModal";
 import { BoardFormModal } from "../Board/BoardFormModal";
 import { DeleteBoardModal } from "../Board/DeleteBoardModal";
@@ -24,8 +22,6 @@ export const TopNav = ({
   const [showBoardMenu, setShowBoardMenu] = useState<boolean>(false);
   const [showEditBoardFormModal, setShowEditBoardFormModal] = useState<boolean>(false);
   const [showDeleteBoardModal, setShowDeleteBoardModal] = useState<boolean>(false);
-
-  const { loading } = useFetchBoards();
   useTheme();
   const { colorTheme } = useSelector(getThemeState);
   const { boardName, boards, board } = useSelector(getAllBoardsState);
@@ -43,9 +39,9 @@ export const TopNav = ({
         border-silver-200
         dark:border-black-100"
       >
-        {loading ? (
+        {/* {loading ? (
           <Loader color="#828FA3" />
-        ) : (
+        ) : ( */}
           <>
             <div className="flex justify-between">
               <MobileTopLeftNav title={board?.name || boardName || boards[0]?.name}/>
@@ -86,7 +82,7 @@ export const TopNav = ({
               />
             )}
           </>
-        )}
+        {/* )} */}
       </nav>
       {showAddNewTaskFormModal && (
         <TaskFormModal setShowModal={setshowAddNewTaskFormModal} />
