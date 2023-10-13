@@ -44,7 +44,7 @@ export const SideBarMenu = ({
               </span>
             }
             handleClick={() => setShowModal(true)}
-            px="5"
+            extraClasses="px-5"
             hasIcon
             leftIcon={<AddSVG color={"#FFFFFF"}/>}
           />

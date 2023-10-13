@@ -37,7 +37,8 @@ export const Select:FC<ISelectProps> = ({
       </label>
       <div
         onClick={() => setOpen(prev => !prev)}
-        className={`p-2 flex items-center text-black-100 dark:text-white justify-between rounded border border-gray-100 cursor-pointer`}
+        className={`p-2 flex items-center text-black-100 dark:text-white justify-between
+          rounded cursor-pointer border ${open ? "border-purple-200" : "border-gray-100"}`}
       >
         {selected ? (selected?.length > 15
           ? selected?.substring(0, 15) + "..."
@@ -45,8 +46,8 @@ export const Select:FC<ISelectProps> = ({
         <img src={open ? ChevronUpIcon : ChevronDownIcon} alt="logo" className="px-2"/>
       </div>
       <ul
-        className={`bg-white mt-2 overflow-y-auto transition-all duration-500 ${
-          open ? "max-h-28 border border-silver-200 z-[50]" : "max-h-0"
+        className={`bg-white dark:bg-black-300 mt-2 rounded overflow-y-auto transition-all duration-500 ${
+          open ? "max-h-28 z-[50]" : "max-h-0"
         } `}
       >
         {optionsData?.map((data, i) => {
@@ -54,7 +55,7 @@ export const Select:FC<ISelectProps> = ({
             <li
               key={i}
               className={`p-2 text-m cursor-pointer
-                ${data === selected ? 'bg-purple-200 text-white' : 'text-black-100 hover:bg-silver-300'}
+                ${data === selected ? 'bg-purple-200 text-white' : 'text-black-100 hover:bg-silver-300 dark:hover:text-white'}
               `}
               onClick={() => handleSelectChange(data)}
             >

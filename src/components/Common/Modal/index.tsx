@@ -72,7 +72,7 @@ export const Modal:FC<IModalProps> = ({
                   title={actionTerm || ''}
                   handleClick={performAction}
                   disabled={actionBtnLoading}
-                  px="20"
+                  extraClasses="px-20"
                 />
 
                 <Button
@@ -83,7 +83,7 @@ export const Modal:FC<IModalProps> = ({
                   title="Cancel"
                   handleClick={() => setShowModal(false)}
                   disabled={actionBtnLoading}
-                  px="20"
+                  extraClasses="px-20"
                 />
               </div>
             )}

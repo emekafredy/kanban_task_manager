@@ -62,7 +62,7 @@ export const TopNav = ({
                 }
                 handleClick={() => setshowAddNewTaskFormModal(true)}
                 disabled={selectedBoard && selectedBoard?.columns.length === 0}
-                px="5"
+                extraClasses="px-6"
                 hasIcon
                 leftIcon={<AddSVG color={"#FFFFFF"}/>}
               />

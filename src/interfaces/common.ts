@@ -15,7 +15,7 @@ export interface IButtonProps {
   disabled?: boolean;
   large?: boolean;
   small?: boolean;
-  px?: string;
+  extraClasses?: string;
   hasIcon?: boolean;
   leftIcon?: React.ReactNode;
 }

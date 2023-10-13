@@ -23,7 +23,7 @@ export const NoColumn = () => {
             </span>
           }
           handleClick={() => setShowEditBoardFormModal(true)}
-          px="5"
+          extraClasses="px-5"
           hasIcon
           leftIcon={<AddSVG color={"#FFFFFF"}/>}
         />
