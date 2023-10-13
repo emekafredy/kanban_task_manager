@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AddSVG, } from "../../components/Common/SVG/AddSVG";
 import { BoardFormModal } from "../../components/Board/BoardFormModal";
+import { Button } from "../../components/Common/Forms/Button";
 
 export const NoColumn = () => {
   const [showEditBoardFormModal, setShowEditBoardFormModal] = useState<boolean>(false);
@@ -11,15 +12,21 @@ export const NoColumn = () => {
         <h4 className="text-l font-semibold text-gray-200 mb-4">
           This board is empty. Create a new column to get started.
         </h4>
-        <button
-          type="button"
-          className="text-white bg-purple-200 rounded-full px-5 py-3 
-            inline-flex items-center font-extrabold mr-4"
-          onClick={() => setShowEditBoardFormModal(true)}
-        >
-          <AddSVG color={"#FFFFFF"} />
-          <span className="tablet:inline sm-mobile:hidden text-s ml-1">Add New Column</span>
-        </button>
+        <Button
+          primary
+          buttonType="button"
+          roundedBG
+          large
+          title={
+            <span className="tablet:inline text-s ml-1">
+              Add New Column
+            </span>
+          }
+          handleClick={() => setShowEditBoardFormModal(true)}
+          extraClasses="px-5"
+          hasIcon
+          leftIcon={<AddSVG color={"#FFFFFF"}/>}
+        />
       </div>
 
       {showEditBoardFormModal && (

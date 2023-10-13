@@ -185,25 +185,28 @@ export const TaskFormModal:FC<IFormModalProps> = ({
           >
             Subtasks
           </label>
-          {taskSubtasks.map((st, i) => {
-            return (
-              <GroupInput
-                key={i}
-                inputId={String(i)}
-                removeInput={(e) => handleRemoveSubtask(e, st)}
-                value={st.title}
-                handleChange={(e) => handleSubtaskChange(e)}
-                placeholder={setPlaceholder(i)}
-              />
-            )
-          })}
+          <div className="mb-3">
+            {taskSubtasks.map((st, i) => {
+              return (
+                <GroupInput
+                  key={i}
+                  inputId={String(i)}
+                  removeInput={(e) => handleRemoveSubtask(e, st)}
+                  value={st.title}
+                  handleChange={(e) => handleSubtaskChange(e)}
+                  placeholder={setPlaceholder(i)}
+                />
+              )
+            })}
+          </div>
           <div>
             <Button
-              silver
+              secondary
               buttonType="button"
-              title="Add New Subtask"
               fullwidth
               roundedBG
+              large
+              title="Add New Subtask"
               handleClick={() => handleAddSubtask()}
               disabled={taskSubtasks[taskSubtasks.length - 1] === ''}
             />
@@ -219,11 +222,12 @@ export const TaskFormModal:FC<IFormModalProps> = ({
 
           <div>
             <Button
-              purple
-              buttonType="submit"
-              title={mode === "update" ? "Save Changes" : "Create Task"}
+              primary
               fullwidth
               roundedBG
+              large
+              buttonType="submit"
+              title={mode === "update" ? "Save Changes" : "Create Task"}
               disabled={loading}
             />
           </div>

@@ -5,6 +5,7 @@ import { BoardSVG } from "../Common/SVG/BoardSVG";
 import { AddSVG } from "../Common/SVG/AddSVG";
 import { getAllBoardsState } from "../../store/slices/board";
 import { useFetchSingleBoard } from "../../hooks/useFetchSingleBoard";
+import { Button } from "../Common/Forms/Button";
 
 export const SideBarMenu = ({
   setShowModal
@@ -30,17 +31,23 @@ export const SideBarMenu = ({
       {boards?.length === 0 ? (
         <div className="text-center">
           <h4 className="text-l font-semibold text-gray-200 mb-4">
-            You have no boards yet?
+            You have no board yet
           </h4>
-          <button
-            type="button"
-            className="text-white bg-purple-200 rounded-full px-5 py-3 
-              inline-flex items-center font-extrabold mr-4"
-            onClick={() => setShowModal(true)}
-          >
-            <AddSVG color={"#FFFFFF"} />
-            <span className="tablet:inline sm-mobile:hidden text-s ml-1">Create New Board</span>
-          </button>
+          <Button
+            primary
+            buttonType="button"
+            roundedBG
+            large
+            title={
+              <span className="tablet:inline text-s ml-1">
+                Create New Board
+              </span>
+            }
+            handleClick={() => setShowModal(true)}
+            extraClasses="px-5"
+            hasIcon
+            leftIcon={<AddSVG color={"#FFFFFF"}/>}
+          />
         </div>
       ) : (
         <>

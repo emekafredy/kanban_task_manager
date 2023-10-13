@@ -27,14 +27,13 @@ export const MobileTopLeftNav:FC<IMobileTopLeftNavProps> = ({
         </div>
 
         <div className="relative">
-          <button
+          <span
             className="flex items-center px-6 pb-2 pt-2.5 text-black-400 dark:text-white font-bold"
-            type="button"
             onClick={() => setShowMobileSidebar((prev) => !prev)}
           >
             {title}
             <img src={showMobileSideBar ? ChevronUpIcon : ChevronDownIcon} alt="logo" className="px-2"/>
-          </button>
+          </span>
 
           {showMobileSideBar && (
             <div className="absolute z-[1000] w-full float-left mt-6 min-w-max

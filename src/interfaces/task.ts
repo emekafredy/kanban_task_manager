@@ -54,3 +54,13 @@ export interface ITaskInfoProps {
     subtask?: SubtaskProps
   ) => void;
 }
+
+export interface ISubtaskCheckBoxProps {
+  id: number;
+  subtask: SubtaskProps;
+  handleTaskUpdate: (
+    change: string,
+    status: string,
+    subtask?: SubtaskProps
+  ) => void;
+}

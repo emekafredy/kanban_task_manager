@@ -3,17 +3,21 @@ export interface ILoaderProps {
 }
 
 export interface IButtonProps {
-  title: string;
+  title: string | React.ReactNode;
   fullwidth?: boolean;
   rounded?: boolean;
   roundedBG?: boolean;
-  purple?: boolean;
-  silver?: boolean;
-  white?: boolean;
-  black?: boolean;
+  primary?: boolean;
+  secondary?: boolean;
+  destructive?: boolean;
   buttonType: 'button' | 'submit' | 'reset';
   handleClick?: () => void;
   disabled?: boolean;
+  large?: boolean;
+  small?: boolean;
+  extraClasses?: string;
+  hasIcon?: boolean;
+  leftIcon?: React.ReactNode;
 }
 
 export interface IModalProps {

@@ -23,8 +23,10 @@ export const Textarea:FC<IInputProps> = ({
       )}
       <textarea
         {...register(formTitle)}
-        className="appearance-none border border-gray-100 rounded w-full placeholder-gray-200 dark:placeholder-opacity-0 dark:placeholder-gray-100
-          py-2 px-3 text-black-100 dark:text-white leading-tight focus:outline-purple-200 dark:bg-black-200"
+        className={`appearance-none border border-gray-100 rounded w-full
+          placeholder-gray-200 dark:placeholder-opacity-0 dark:placeholder-gray-100
+          py-2 px-3 text-black-100 dark:text-white leading-tight dark:bg-black-200
+          ${errors[formTitle] ? "focus:outline-red-200" : "focus:outline-none"}`}
         id={formTitle}
         type={inputType}
         placeholder={placeholder}

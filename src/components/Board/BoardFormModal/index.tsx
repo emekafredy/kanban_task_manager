@@ -144,29 +144,32 @@ export const BoardFormModal:FC<IFormModalProps> = ({
           >
             Columns
           </label>
-          {boardColumns.map((col, i) => {
-            const hasTasks = checkExistingColumn(mode, col, exisitingColumns);
+          <div className="mb-3">
+            {boardColumns.map((col, i) => {
+              const hasTasks = checkExistingColumn(mode, col, exisitingColumns);
 
-            return (
-              <GroupInput
-                key={i}
-                inputId={String(i)}
-                removeInput={(e) => handleRemoveColumn(e, col)}
-                value={col.name}
-                handleChange={(e) => handleColumnChange(e)}
-                inputDisabled={hasTasks}
-                rmvBtnDisabled={hasTasks}
-              />
-            )
-          })}
+              return (
+                <GroupInput
+                  key={i}
+                  inputId={String(i)}
+                  removeInput={(e) => handleRemoveColumn(e, col)}
+                  value={col.name}
+                  handleChange={(e) => handleColumnChange(e)}
+                  inputDisabled={hasTasks}
+                  rmvBtnDisabled={hasTasks}
+                />
+              )
+            })}
+          </div>
 
           <div className="mb-4">
             <Button
-              silver
-              buttonType="button"
-              title="Add New Column"
+              secondary
+              large
               fullwidth
               roundedBG
+              buttonType="button"
+              title="Add New Column"
               handleClick={() => handleAddColumn()}
               disabled={boardColumns[boardColumns.length - 1] === ''}
             />
@@ -174,11 +177,12 @@ export const BoardFormModal:FC<IFormModalProps> = ({
 
           <div>
             <Button
-              purple
-              buttonType="submit"
-              title={mode === "update" ? "Save Changes" : "Create New Board"}
+              primary
               fullwidth
               roundedBG
+              large
+              buttonType="submit"
+              title={mode === "update" ? "Save Changes" : "Create New Board"}
               disabled={loading}
             />
           </div>
