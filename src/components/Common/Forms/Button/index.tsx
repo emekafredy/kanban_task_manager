@@ -7,22 +7,30 @@ export const Button:FC<IButtonProps> = ({
   fullwidth,
   rounded,
   roundedBG,
-  purple,
-  silver,
-  white,
-  black,
+  primary,
+  secondary,
+  destructive,
   buttonType,
   handleClick,
-  disabled=false
+  disabled=false,
+  large,
+  small,
+  px,
+  leftIcon,
+  hasIcon,
 }) => {
-  const classes = className("mt-2 py-3 text-s font-bold transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed", {
+  const classes = className(`sm-mobile:text-s desktop:text-m font-bold transition
+    duration-300 disabled:opacity-50 disabled:cursor-not-allowed px-${px}`,
+  {
     "w-full": fullwidth,
     "rounded": rounded,
     "rounded-full": roundedBG,
-    "bg-purple-200 text-white hover:bg-purple-300": purple,
-    "bg-silver-300 dark:bg-white text-purple-200 hover:bg-silver-400": silver,
-    "bg-white text-purple-200": white,
-    "bg-black-400 text-white": black,
+    "py-3": large,
+    "py-2": small,
+    "bg-purple-200 text-white hover:bg-purple-100": primary,
+    "bg-silver-300 dark:bg-white text-purple-200 hover:bg-purple-400 dark:hover:bg-silver-100": secondary,
+    "bg-red-200 text-white hover hover:bg-red-100": destructive,
+    "inline-flex items-center": hasIcon
   });
 
   return (
@@ -32,6 +40,7 @@ export const Button:FC<IButtonProps> = ({
       onClick={handleClick}
       disabled={disabled}
     >
+      {leftIcon}
       {title}
     </button>
   )

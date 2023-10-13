@@ -12,6 +12,7 @@ import { TaskFormModal } from "../Task/TaskFormModal";
 import { BoardFormModal } from "../Board/BoardFormModal";
 import { DeleteBoardModal } from "../Board/DeleteBoardModal";
 import { OptionsMenu } from "../Common/OptionsMenu";
+import { Button } from "../Common/Forms/Button";
 
 export const TopNav = ({
   sideBarVisible,
@@ -39,50 +40,52 @@ export const TopNav = ({
         border-silver-200
         dark:border-black-100"
       >
-        {/* {loading ? (
-          <Loader color="#828FA3" />
-        ) : ( */}
-          <>
-            <div className="flex justify-between">
-              <MobileTopLeftNav title={board?.name || boardName || boards[0]?.name}/>
-              <TopLeftNav
-                colorTheme={colorTheme}
-                sideBarVisible={sideBarVisible}
-                title={boardName || boards[0]?.name}
+        <>
+          <div className="flex justify-between">
+            <MobileTopLeftNav title={board?.name || boardName || boards[0]?.name}/>
+            <TopLeftNav
+              colorTheme={colorTheme}
+              sideBarVisible={sideBarVisible}
+              title={boardName || boards[0]?.name}
+            />
+
+            <div className="flex items-center p-4">
+              <Button
+                primary
+                buttonType="button"
+                roundedBG
+                large
+                title={
+                  <span className="tablet:inline sm-mobile:hidden text-s ml-1">
+                    Add New Task
+                  </span>
+                }
+                handleClick={() => setshowAddNewTaskFormModal(true)}
+                disabled={selectedBoard && selectedBoard?.columns.length === 0}
+                px="5"
+                hasIcon
+                leftIcon={<AddSVG color={"#FFFFFF"}/>}
               />
 
-              <div className="flex items-center p-4">
-                <button
-                  type="button"
-                  className="text-white bg-purple-200 rounded-full px-5 py-3 
-                    inline-flex items-center font-extrabold mr-4 disabled:opacity-50"
-                  disabled={selectedBoard && selectedBoard?.columns.length === 0}
-                  onClick={() => setshowAddNewTaskFormModal(true)}
-                >
-                  <AddSVG color={"#FFFFFF"}/>
-                  <span className="tablet:inline sm-mobile:hidden text-s ml-1">Add New Task</span>
-                </button>
-
-                <img
-                  src={Elipses}
-                  className="h-5 cursor-pointer mr-4 ml-2"
-                  alt="board-options"
-                  onClick={() => setShowBoardMenu(!showBoardMenu)}
-                />
-              </div>
+              <img
+                src={Elipses}
+                className="h-5 cursor-pointer mr-4 ml-4"
+                alt="board-options"
+                onClick={() => setShowBoardMenu(!showBoardMenu)}
+              />
             </div>
-            {showBoardMenu && (
-              <OptionsMenu
-                editText="Edit Board"
-                deleteText="Delete Board"
-                setShowEditModal={setShowEditBoardFormModal}
-                setShowDeleteModal={setShowDeleteBoardModal}
-                setShowPrevModal={setShowBoardMenu}
-                board
-              />
-            )}
-          </>
-        {/* )} */}
+          </div>
+          {showBoardMenu && (
+            <OptionsMenu
+              editText="Edit Board"
+              deleteText="Delete Board"
+              setShowEditModal={setShowEditBoardFormModal}
+              setShowDeleteModal={setShowDeleteBoardModal}
+              setShowPrevModal={setShowBoardMenu}
+              board
+            />
+          )}
+        </>
       </nav>
       {showAddNewTaskFormModal && (
         <TaskFormModal setShowModal={setshowAddNewTaskFormModal} />

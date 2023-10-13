@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { IModalProps } from "../../../interfaces/common";
 import Elipses from "../../../assets/icons/icon-vertical-ellipsis.svg";
+import { Button } from "../Forms/Button";
 
 export const Modal:FC<IModalProps> = ({
   title,
@@ -41,25 +42,19 @@ export const Modal:FC<IModalProps> = ({
                 {title}
               </h3>
               {closeBTN ? (
-                <button
-                  className="ml-auto border-0 text-gray-200 text-3xl font-bold outline-none focus:outline-none"
+                <span
+                  className="text-gray-200 dark:text-white text-3xl block cursor-pointer"
                   onClick={() => setShowModal(false)}
                 >
-                  <span className="text-gray-200 dark:text-white text-3xl block outline-none focus:outline-none">
-                    ×
-                  </span>
-                </button>
+                  ×
+                </span>
               ) : (
-                <button
-                  className="ml-auto border-0 text-gray-200 text-3xl font-bold outline-none focus:outline-none"
+                <img
+                  src={Elipses}
+                  className="cursor-pointer"
+                  alt="board-options"
                   onClick={() => setShowMenuOptions?.(!showMenuOptions)}
-                >
-                  <img
-                    src={Elipses}
-                    className="h-5 w-1 cursor-pointer"
-                    alt="board-options"
-                  />
-                </button>
+                />
               )}
 
               {showMenuOptions && menuOptions}
@@ -69,21 +64,27 @@ export const Modal:FC<IModalProps> = ({
 
             {setFooter && (
               <div className="flex items-center justify-between px-8 pt-4 pb-8 rounded-b">
-                <button
-                  className="bg-red-200 text-white font-bold px-20 py-2 text-m outline-none focus:outline-none rounded-full"
-                  type="button"
-                  onClick={performAction}
+                <Button
+                  destructive
+                  buttonType="button"
+                  roundedBG
+                  small
+                  title={actionTerm || ''}
+                  handleClick={performAction}
                   disabled={actionBtnLoading}
-                >
-                  {actionTerm}
-                </button>
-                <button
-                  className="bg-silver-100 text-purple-200 font-bold px-20 py-2 text-m outline-none focus:outline-none rounded-full"
-                  type="button"
-                  onClick={() => setShowModal(false)}
-                >
-                  Cancel
-                </button>
+                  px="20"
+                />
+
+                <Button
+                  secondary
+                  buttonType="button"
+                  roundedBG
+                  small
+                  title="Cancel"
+                  handleClick={() => setShowModal(false)}
+                  disabled={actionBtnLoading}
+                  px="20"
+                />
               </div>
             )}
           </div>

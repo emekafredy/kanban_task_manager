@@ -33,13 +33,12 @@ export const BoardData:FC<IBoardDataProps> = ({board}) => {
             dark:bg-gradient-to-t dark:from-black-300 dark:to-black-200
             rounded hover:cursor-pointer my-4 h-full w-[300px]">
             <div className="text-center">
-              <button
-                type="button"
+              <span
                 className="text-gray-200 px-5 py-3 
                   inline-flex items-center font-bold mr-4">
                 <AddSVG color={"#828FA3"} />
                 <span className="text-l ml-1">New Column</span>
-              </button>
+              </span>
             </div>
           </div>
         </div>

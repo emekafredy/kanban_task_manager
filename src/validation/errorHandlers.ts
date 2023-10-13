@@ -1,5 +1,4 @@
 import {checkNewDuplicate} from './input';
-import { IBoardObjectProps } from '../interfaces/board';
 import { IColumnProps } from '../interfaces/column';
 import { TaskProps } from '../interfaces/task';
 
