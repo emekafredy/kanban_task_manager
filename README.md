@@ -33,7 +33,8 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+<img width="1792" alt="ktm-dark" src="https://github.com/emekafredy/kanban_task_manager/assets/29521319/cd9790a4-9d14-4466-ba9d-1263b224a1c6">
+<img width="1792" alt="ktm-light" src="https://github.com/emekafredy/kanban_task_manager/assets/29521319/5a2e22f3-ad53-42b1-9c93-e006b26df168">
 
 
 ### Links
