@@ -130,7 +130,7 @@ export const BoardFormModal:FC<IFormModalProps> = ({
           <Input
             hasLabel={true}
             errors={errors}
-            formLabel="Name"
+            formLabel="Board Name"
             formTitle="name"
             inputType="text"
             placeholder="e.g. Web Design"
@@ -139,10 +139,10 @@ export const BoardFormModal:FC<IFormModalProps> = ({
           />
 
           <label
-            className="block text-gray-200 text-s font-semibold mb-2 mt-8"
+            className="block text-gray-200 dark:text-white text-s font-semibold mb-2 mt-8"
             htmlFor="columns"
           >
-            Columns
+            Board Columns
           </label>
           <div className="mb-3">
             {boardColumns.map((col, i) => {

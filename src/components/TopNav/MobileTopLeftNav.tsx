@@ -2,10 +2,9 @@ import { FC, useState, useEffect } from "react";
 import MobileLogoIcon from "../../assets/icons/logo-mobile.svg";
 import ChevronDownIcon from "../../assets/icons/icon-chevron-down.svg";
 import ChevronUpIcon from "../../assets/icons/icon-chevron-up.svg";
-import { SideBarMenu } from "../SideBar/SideBarMenu";
-import { ThemeSwitch } from "../SideBar/ThemeSwitch";
 import { BoardFormModal } from "../Board/BoardFormModal";
 import { IMobileTopLeftNavProps } from "../../interfaces/navigation";
+import { MobileSideBarMenu } from "../SideBar/MobileSideBarMenu";
 
 export const MobileTopLeftNav:FC<IMobileTopLeftNavProps> = ({
   title
@@ -35,14 +34,13 @@ export const MobileTopLeftNav:FC<IMobileTopLeftNavProps> = ({
             <img src={showMobileSideBar ? ChevronUpIcon : ChevronDownIcon} alt="logo" className="px-2"/>
           </span>
 
-          {showMobileSideBar && (
-            <div className="absolute z-[1000] w-full float-left mt-6 min-w-max
-              h-[250px] overflow-auto rounded-lg border-none bg-white
-              dark:bg-black-200">
-              <SideBarMenu setShowModal={setShowAddNewBoardModal}/>
-              <ThemeSwitch />
-            </div>
-          )}
+          {/* {showMobileSideBar && ( */}
+          <MobileSideBarMenu
+            showMobileSideBar={showMobileSideBar}
+            setShowMobileSidebar={setShowMobileSidebar}
+            setShowAddNewBoardModal={setShowAddNewBoardModal}
+          />
+          {/* )} */}
         </div>
       </div>
       {showAddNewBoardModal && <BoardFormModal setShowModal={setShowAddNewBoardModal} />}

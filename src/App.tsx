@@ -29,7 +29,7 @@ function App() {
               ${sideBarVisible ? 'laptop:col-span-8' : 'col-span-10'}
               relative`}
             >
-              <TopNav sideBarVisible={sideBarVisible}/>
+              <TopNav sideBarVisible={sideBarVisible} />
 
               <Routes>
                 <Route path="/" element={ <Navigate to="/boards" /> }/>

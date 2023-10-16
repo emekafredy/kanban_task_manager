@@ -33,7 +33,7 @@ export const Modal:FC<IModalProps> = ({
         onClick={onOverlayClick}
       >
         <div
-          className="relative sm-mobile:w-[90%] mobile:w-[75%] tablet:w-[50%] laptop:w-[40%] desktop:w-[30%] m-auto"
+          className="relative sm-mobile:w-[90%] mobile:w-[75%] tablet:w-[60%] laptop:w-[40%] desktop:w-[30%] m-auto"
           onClick={onModalClick}
         >
           <div className="border-0 rounded shadow-lg relative flex flex-col w-full bg-white dark:bg-black-200 outline-none focus:outline-none">
@@ -63,16 +63,17 @@ export const Modal:FC<IModalProps> = ({
             {children}
 
             {setFooter && (
-              <div className="flex items-center justify-between px-8 pt-4 pb-8 rounded-b">
+              <div className="mobile:block tablet:flex tablet:items-center tablet:justify-between px-8 pt-4 pb-8 rounded-b">
                 <Button
                   destructive
                   buttonType="button"
                   roundedBG
                   small
+                  mobileFullwidth
                   title={actionTerm || ''}
                   handleClick={performAction}
                   disabled={actionBtnLoading}
-                  extraClasses="px-20"
+                  extraClasses="px-20 mb-4"
                 />
 
                 <Button
@@ -80,6 +81,7 @@ export const Modal:FC<IModalProps> = ({
                   buttonType="button"
                   roundedBG
                   small
+                  mobileFullwidth
                   title="Cancel"
                   handleClick={() => setShowModal(false)}
                   disabled={actionBtnLoading}
