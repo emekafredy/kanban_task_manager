@@ -11,15 +11,15 @@ export const Board = () => {
 
   return (
     <>
-    {boards.length === 0 ? (
-      <NoBoard />
-    ) : (
-      selectedBoard?.columns.length > 0 ? (
-        <BoardData board={selectedBoard} />
+      {boards.length === 0 ? (
+        <NoBoard />
       ) : (
-        <NoColumn />
-      )
-    )}
+        selectedBoard?.columns.length > 0 ? (
+          <BoardData board={selectedBoard} />
+        ) : (
+          <NoColumn />
+        )
+      )}
     </>
   );
 }

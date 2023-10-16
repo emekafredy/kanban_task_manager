@@ -17,7 +17,7 @@ import { Button } from "../Common/Forms/Button";
 export const TopNav = ({
   sideBarVisible,
 }: {
-  sideBarVisible: boolean
+  sideBarVisible: boolean;
 }) => {
   const [showAddNewTaskFormModal, setshowAddNewTaskFormModal] = useState<boolean>(false);
   const [showBoardMenu, setShowBoardMenu] = useState<boolean>(false);
@@ -42,7 +42,9 @@ export const TopNav = ({
       >
         <>
           <div className="flex justify-between">
-            <MobileTopLeftNav title={board?.name || boardName || boards[0]?.name}/>
+            <MobileTopLeftNav
+              title={board?.name || boardName || boards[0]?.name}
+            />
             <TopLeftNav
               colorTheme={colorTheme}
               sideBarVisible={sideBarVisible}

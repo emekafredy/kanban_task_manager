@@ -18,6 +18,7 @@ export interface IButtonProps {
   extraClasses?: string;
   hasIcon?: boolean;
   leftIcon?: React.ReactNode;
+  mobileFullwidth?: boolean;
 }
 
 export interface IModalProps {
