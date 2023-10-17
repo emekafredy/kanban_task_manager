@@ -7,6 +7,7 @@
           "name": "Todo",
           "tasks": [
             {
+              "id": "1697579701782",
               "title": "Build UI for onboarding flow",
               "description": "",
               "status": "Todo",
@@ -27,6 +28,7 @@
               "order": 0
             },
             {
+              "id": "1697579701783",
               "title": "Build UI for search",
               "description": "",
               "status": "Todo",
@@ -39,6 +41,7 @@
               "order": 1
             },
             {
+              "id": "1697579701784",
               "title": "Build settings UI",
               "description": "",
               "status": "Todo",
@@ -55,6 +58,7 @@
               "order": 2
             },
             {
+              "id": "1697579701785",
               "title": "QA and test all major user journeys",
               "description": "Once we feel version one is ready, we need to rigorously test it both internally and externally to identify any major gaps.",
               "status": "Todo",
@@ -76,6 +80,7 @@
           "name": "Doing",
           "tasks": [
             {
+              "id": "1697579701786",
               "title": "Design settings and search pages",
               "description": "",
               "status": "Doing",
@@ -96,6 +101,7 @@
               "order": 0
             },
             {
+              "id": "1697579701787",
               "title": "Add account management endpoints",
               "description": "",
               "status": "Doing",
@@ -116,6 +122,7 @@
               "order": 1
             },
             {
+              "id": "1697579701788",
               "title": "Design onboarding flow",
               "description": "",
               "status": "Doing",
@@ -136,6 +143,7 @@
               "order": 2
             },
             {
+              "id": "1697579701789",
               "title": "Add search enpoints",
               "description": "",
               "status": "Doing",
@@ -152,6 +160,7 @@
               "order": 3
             },
             {
+              "id": "1697579701790",
               "title": "Add authentication endpoints",
               "description": "",
               "status": "Doing",
@@ -168,6 +177,7 @@
               "order": 4
             },
             {
+              "id": "1697579701791",
               "title": "Research pricing points of various competitors and trial different business models",
               "description": "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
               "status": "Doing",
@@ -193,6 +203,7 @@
           "name": "Done",
           "tasks": [
             {
+              "id": "1697579701792",
               "title": "Conduct 5 wireframe tests",
               "description": "Ensure the layout continues to make sense and we have strong buy-in from potential users.",
               "status": "Done",
@@ -205,6 +216,7 @@
               "order": 0
             },
             {
+              "id": "1697579701793",
               "title": "Create wireframe prototype",
               "description": "Create a greyscale clickable wireframe prototype to test our asssumptions so far.",
               "status": "Done",
@@ -217,6 +229,7 @@
               "order": 1
             },
             {
+              "id": "1697579701794",
               "title": "Review results of usability tests and iterate",
               "description": "Keep iterating through the subtasks until we're clear on the core concepts for the app.",
               "status": "Done",
@@ -237,6 +250,7 @@
               "order": 2
             },
             {
+              "id": "1697579701795",
               "title": "Create paper prototypes and conduct 10 usability tests with potential customers",
               "description": "",
               "status": "Done",
@@ -253,6 +267,7 @@
               "order": 3
             },
             {
+              "id": "1697579701796",
               "title": "Market discovery",
               "description": "We need to define and refine our core product. Interviews will help us learn common pain points and help us define the strongest MVP.",
               "status": "Done",
@@ -265,6 +280,7 @@
               "order": 4
             },
             {
+              "id": "1697579701797",
               "title": "Competitor analysis",
               "description": "",
               "status": "Done",
@@ -281,6 +297,7 @@
               "order": 5
             },
             {
+              "id": "1697579701798",
               "title": "Research the market",
               "description": "We need to get a solid overview of the market to ensure we have up-to-date estimates of market size and demand.",
               "status": "Done",
@@ -301,106 +318,13 @@
       ]
     },
     {
-      "name": "Marketing Plan",
-      "columns": [
-        {
-          "name": "Todo",
-          "tasks": [
-            {
-              "title": "Plan Product Hunt launch",
-              "description": "",
-              "status": "Todo",
-              "subtasks": [
-                {
-                  "title": "Find hunter",
-                  "isCompleted": false
-                },
-                {
-                  "title": "Gather assets",
-                  "isCompleted": false
-                },
-                {
-                  "title": "Draft product page",
-                  "isCompleted": false
-                },
-                {
-                  "title": "Notify customers",
-                  "isCompleted": false
-                },
-                {
-                  "title": "Notify network",
-                  "isCompleted": false
-                },
-                {
-                  "title": "Launch!",
-                  "isCompleted": false
-                }
-              ],
-              "order": 0
-            },
-            {
-              "title": "Share on Show HN",
-              "description": "",
-              "status": "Todo",
-              "subtasks": [
-                {
-                  "title": "Draft out HN post",
-                  "isCompleted": false
-                },
-                {
-                  "title": "Get feedback and refine",
-                  "isCompleted": false
-                },
-                {
-                  "title": "Publish post",
-                  "isCompleted": false
-                }
-              ],
-              "order": 1
-            },
-            {
-              "title": "Write launch article to publish on multiple channels",
-              "description": "",
-              "status": "Todo",
-              "subtasks": [
-                {
-                  "title": "Write article",
-                  "isCompleted": false
-                },
-                {
-                  "title": "Publish on LinkedIn",
-                  "isCompleted": false
-                },
-                {
-                  "title": "Publish on Inndie Hackers",
-                  "isCompleted": false
-                },
-                {
-                  "title": "Publish on Medium",
-                  "isCompleted": false
-                }
-              ],
-              "order": 2
-            }
-          ]
-        },
-        {
-          "name": "Doing",
-          "tasks": []
-        },
-        {
-          "name": "Done",
-          "tasks": []
-        }
-      ]
-    },
-    {
       "name": "Roadmap",
       "columns": [
         {
           "name": "Now",
           "tasks": [
             {
+              "id": "1697579701760",
               "title": "Launch version one",
               "description": "",
               "status": "Now",
@@ -417,6 +341,7 @@
               "order": 0
             },
             {
+              "id": "1697579701761",
               "title": "Review early feedback and plan next steps for roadmap",
               "description": "Beyond the initial launch, we're keeping the initial roadmap completely empty. This meeting will help us plan out our next steps based on actual customer feedback.",
               "status": "Now",

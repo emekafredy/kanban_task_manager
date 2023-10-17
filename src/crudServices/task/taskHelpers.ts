@@ -23,7 +23,7 @@ export const modifyTaskData = async (
   let selectedColumn = board.columns.find(c => c.name === status) as IColumnProps;
   const columnIndex = board.columns.findIndex((c) => c.name === selectedColumn.name)
 
-  const taskIndex = selectedColumn.tasks.findIndex((t) => t.title === updatedTask.title);
+  const taskIndex = selectedColumn.tasks.findIndex((t) => t.id === updatedTask.id);
   const orderedTasks = orderData(taskIndex, selectedColumn.tasks, updatedTask);
 
   return {
@@ -95,7 +95,7 @@ export const removeTaskFromPreviousColumn = (
   prevStatus: string,
 ) => {
   let previousColumn = board.columns.find(c => c.name === prevStatus) as IColumnProps;
-  const filteredTasks = previousColumn.tasks.filter((t) => t.title !== updatedTask.title);
+  const filteredTasks = previousColumn.tasks.filter((t) => t.id !== updatedTask.id);
   previousColumn = {
     ...previousColumn,
     tasks: [...filteredTasks]
@@ -188,7 +188,7 @@ export const updateColumnsWithoutStatusChange = (
   updatedTask: TaskProps,
   board: IBoardObjectProps,
 ) => {
-  const taskIndex = column.tasks.findIndex((t) => t.title === task.title)
+  const taskIndex = column.tasks.findIndex((t) => t.id === task.id);
   const orderedTasks = orderData(taskIndex, column.tasks, updatedTask);
 
   const selectedColumn = {
