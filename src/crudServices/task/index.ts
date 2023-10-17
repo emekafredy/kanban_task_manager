@@ -36,8 +36,9 @@ export const createTask = async ({
     if (st.title != '') taskSubtasks.push(st);
   });
 
+  const taskId: string = Date.now().toString();
   const newTask = {
-    title, description, status, subtasks: taskSubtasks
+    id: taskId, title, description, status, subtasks: taskSubtasks
   }
 
   let newTaskColumn = board.columns.find(c => c.name === status) as IColumnProps;
@@ -128,7 +129,7 @@ export const deleteTask = async (
   board: IBoardObjectProps,
   boards: IBoardObjectProps[]
 ): Promise<IBoardObjectPropsResponse<any>> => {
-  const filteredTasks = column.tasks.filter(t => t.title !== task.title);
+  const filteredTasks = column.tasks.filter(t => t.id !== task.id);
 
   const updatedColumn = { ...column, tasks: [...filteredTasks]}
   const columnIndex = await board.columns.findIndex((c) => c.name === column.name);

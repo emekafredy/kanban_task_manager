@@ -31,15 +31,17 @@ export const BoardColumn:FC<IBoardColumnProps> = ({
         </div>
       )}
 
-      {column.tasks?.map((task, index) => {
-        return (
-          <TaskCard
-            key={index}
-            task={task}
-            setShowModal={() => loadTask(task)}
-          />
-        )
-      })}
+      <div>
+        {column.tasks?.map((task) => {
+          return (
+            <TaskCard
+              key={task.id}
+              task={task}
+              setShowModal={() => loadTask(task)}
+            />
+          )
+        })}
+      </div>
 
       {showTaskDetailsModal && (
         <TaskDetailsModal
