@@ -1,6 +1,6 @@
 # [Kanban Task Manager](https://kanban-task-manager-nine.vercel.app/)
 
-This is a solution to the [Kanban task management web app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/kanban-task-management-web-app-wgQLt-HlbB). 
+[Frontend Mentor Project](https://www.frontendmentor.io/challenges/kanban-task-management-web-app-wgQLt-HlbB). 
 
 ## Table of contents
 
