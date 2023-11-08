@@ -2,17 +2,6 @@
 
 [Frontend Mentor Project](https://www.frontendmentor.io/challenges/kanban-task-management-web-app-wgQLt-HlbB). 
 
-## Table of contents
-
-- [Overview](#overview)
-  - [Screenshot](#screenshot)
-  - [Links](#links)
-- [My process](#my-process)
-  - [Built with](#built-with)
-  - [Useful resources](#useful-resources)
-- [Author](#author)
-- [Acknowledgments](#acknowledgments)
-
 ### Screenshot
 
 <img width="1792" alt="ktm-dark" src="https://github.com/emekafredy/kanban_task_manager/assets/29521319/cd9790a4-9d14-4466-ba9d-1263b224a1c6">
